@@ -1,6 +1,6 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: mydb.c98rnkltv3jo.eu-central-1.rds.amazonaws.com
+    database_host: newdbinstance.c98rnkltv3jo.eu-central-1.rds.amazonaws.com
     database_port: null
     database_name: Classique_Web
     database_user: ETD
