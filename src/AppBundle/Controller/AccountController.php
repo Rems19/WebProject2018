@@ -24,8 +24,7 @@ class AccountController extends Controller
                 [
                     'name' => 'username',
                     'placeholder' => 'Username',
-                    'type' => 'text',
-                    'required' => true
+                    'type' => 'text'
                 ],
                 [
                     'name' => 'password',
@@ -52,5 +51,42 @@ class AccountController extends Controller
         }
 
         return new Response('Ok', 200);
+    }
+
+    /**
+     * @Route("/register")
+     * @Method("GET")
+     */
+    public function showRegister(Request $request) {
+        $error = $request->query->get('error');
+        return $this->render('form.html.twig', [
+            'title' => 'Registration',
+            'error' => $error,
+            'fields' => [
+                [
+                    'name' => 'username',
+                    'placeholder' => 'Username',
+                    'type' => 'text'
+                ],
+                [
+                    'name' => 'email',
+                    'placeholder' => 'Email',
+                    'type' => 'email'
+                ],
+                [
+                    'name' => 'password',
+                    'placeholder' => 'Password',
+                    'type' => 'password'
+                ],
+                [
+                    'name' => 'password-conf',
+                    'placeholder' => 'Confirm Password',
+                    'type' => 'password'
+                ]
+            ],
+            'submit' => 'Register',
+            'method' => 'post',
+            'action' => '/register'
+        ]);
     }
 }
