@@ -6,12 +6,15 @@ Connexion
 
 {% block body %}
     <div class="page-header">
-        <h2>Connexion</h2>
+        <h1>Connexion | <small>Connectez-vous à votre compte Alib'Album</small></h1>
     </div>
-    {% if error %}
-        <p class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
-    {% endif %}
     <form action="{{ path('login') }}" method="post">
+        {% if error %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Erreur !</strong> Les identifiants sont incorrects.
+            </div>
+        {% endif %}
         <div class="form-group">
             <label for="username">Nom d'utilisateur</label>
             <input type="text" class="form-control" id="username" name="_username" placeholder="Nom d'utilisateur">
@@ -26,22 +29,9 @@ Connexion
 
 {% block stylesheets %}
 <style>
-    main {
-        margin-top: 20px;
-    }
     form {
         max-width: 50%;
         margin: 0 auto;
-    }
-    .error {
-        display: block;
-        margin: 10px auto;
-        padding: 10px;
-        min-width: 20%;
-        border-radius: 8px;
-        color: #D8000C;
-        background: #FFD2D2;
-        text-align: center;
     }
 </style>
 {% endblock %}
