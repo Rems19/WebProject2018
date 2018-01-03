@@ -1,13 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- Custom styles for this template -->
+        <style>
+            body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+            h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+            h1 { font-size: 36px; }
+            h2 { font-size: 21px; margin-bottom: 1em; }
+            p { margin: 0 0 1em 0; }
+            a { color: #0000F0; }
+            a:hover { text-decoration: none; }
+            code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
+        </style>
+        {% block stylesheets %}{% endblock %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-container-collapse" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('homepage') }}">Alib'Album</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-container-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="{{ app.request.get('_route') == 'homepage' ? 'active' }}"><a href="{{ path('homepage') }}">Accueil</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if app.user %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" id="account-dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    {{ app.user.login }}
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>Lol</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ path('logout') }}"><span class="text-danger">Se déconnecter</span></a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="{{ app.request.get('_route') == 'login' ? 'active' }}"><button class="btn btn-success navbar-btn" onclick="location.href='{{ path('login') }}'">Connexion</button></li>
+                            <li role="separator" style="width: 8px;"></li>
+                        {% endif %}
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+
+        </nav>
+
+        <div class="container">
+
+            {% block body %}{% endblock %}
+
+        </div><!-- /.container -->
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

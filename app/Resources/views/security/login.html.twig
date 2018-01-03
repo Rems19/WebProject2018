@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Connexion
+{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <h2>Connexion</h2>
+    </div>
+    {% if error %}
+        <p class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+    {% endif %}
+    <form action="{{ path('login') }}" method="post">
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" class="form-control" id="username" name="_username" placeholder="Nom d'utilisateur">
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="_password" placeholder="Mot de passe">
+        </div>
+        <button type="submit" class="btn btn-primary">Connexion</button>
+    </form>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    main {
+        margin-top: 20px;
+    }
+    form {
+        max-width: 50%;
+        margin: 0 auto;
+    }
+    .error {
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+        min-width: 20%;
+        border-radius: 8px;
+        color: #D8000C;
+        background: #FFD2D2;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+

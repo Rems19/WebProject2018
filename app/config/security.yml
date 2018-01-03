@@ -4,8 +4,13 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        database:
+            entity:
+              class: AppBundle:Abonne
+              property: login
+
+    encoders:
+      AppBundle\Entity\Abonne: plaintext
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,10 +20,14 @@ security:
 
         main:
             anonymous: ~
-            # activate different ways to authenticate
+            form_login:
+                login_path: /account/login
+                check_path: /account/login
+            logout:
+                path: /account/logout
+                target: homepage
+            provider: database
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+    access_control:
+      - { path: ^/account/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }
