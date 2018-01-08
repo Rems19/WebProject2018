@@ -28,6 +28,30 @@ class Pays
      */
     private $codePays;
 
+    /**
+     * @return string
+     */
+    public function getRawNomPays()
+    {
+        return $this->nomPays;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomPays()
+    {
+        return trim($this->getRawNomPays());
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodePays()
+    {
+        return $this->codePays;
+    }
+
 
 }
 
