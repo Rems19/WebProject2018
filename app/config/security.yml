@@ -29,5 +29,5 @@ security:
             provider: database
 
     access_control:
-      - { path: ^/account/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/account/(login|register)$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }
