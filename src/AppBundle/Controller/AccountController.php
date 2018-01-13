@@ -14,6 +14,14 @@ class AccountController extends Controller
 {
 
     /**
+     * @Route("/account/cart", name="cart")
+     */
+    public function showCart()
+    {
+
+    }
+
+    /**
      * @Route("/account/login", name="login")
      */
     public function showLogin(UserInterface $user = null, AuthenticationUtils $authUtils)

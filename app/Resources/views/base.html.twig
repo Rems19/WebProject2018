@@ -10,7 +10,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 
         <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
         <!-- Custom styles for this template -->
         <style>
@@ -52,7 +52,7 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>Lol</li>
+                                    <li><a href="{{ path('cart') }}"><span class="glyphicon glyphicon-shopping-cart"></span> Voir mon panier</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{ path('logout') }}"><span class="text-danger">Se déconnecter <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></span></a></li>
                                 </ul>
@@ -77,7 +77,7 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
