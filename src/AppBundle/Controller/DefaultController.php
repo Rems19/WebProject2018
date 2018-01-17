@@ -10,15 +10,23 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function showHome()
+    public function homeAction()
     {
         return $this->render('home.html.twig');
     }
 
     /**
-     * @Route("/symfony_index", name="symfony")
+     * @Route("/about", name="about")
      */
     public function indexAction()
+    {
+        return $this->render('about.html.twig');
+    }
+
+    /**
+     * @Route("/symfony_index", name="symfony")
+     */
+    public function symfonyAction()
     {
         // replace this example code with whatever you need
         return $this->render(':default:index.html.twig', [
