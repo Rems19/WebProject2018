@@ -2,5 +2,15 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
+artists:
+    resource: '@AppBundle/Controller/ArtistController.php'
+    type: annotation
+    prefix: /artists
+
+albums:
+    resource: '@AppBundle/Controller/AlbumController.php'
+    type: annotation
+    prefix: /albums
+
 logout:
     path: /account/logout

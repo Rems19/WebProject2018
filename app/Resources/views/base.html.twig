@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}" />
 
         <title>{% block title %}Welcome!{% endblock %}</title>
 
@@ -19,10 +19,11 @@
             html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
             body
             {
-                background: #F5F5F5;
                 font: 18px/1.5 'Open Sans', sans-serif;
                 display: flex;
                 flex-flow: column;
+                background: url("{{ asset('img/bg.png') }}") fixed;
+                padding-top: 50px;
             }
             .navbar
             {
@@ -40,8 +41,6 @@
                 flex: 1 1 auto;
                 display: flex;
                 flex-flow: column;
-                padding-top: 20px;
-                background-image: url("{{ asset('img/bg.png') }}");
             }
         </style>
         {% block stylesheets %}{% endblock %}
@@ -49,7 +48,7 @@
 
     <body>
 
-        <nav class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 0">
+        <nav class="navbar navbar-inverse navbar-static-top navbar-fixed-top" style="margin-bottom: 0">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-container-collapse" aria-expanded="false" aria-controls="navbar">
@@ -63,6 +62,8 @@
                 <div class="collapse navbar-collapse" id="navbar-container-collapse">
                     <ul class="nav navbar-nav">
                         <li class="{{ app.request.get('_route') == 'homepage' ? 'active' }}"><a href="{{ path('homepage') }}">Accueil</a></li>
+                        <li class="{{ app.request.get('_route') == 'artists' ? 'active' }}"><a href="{{ path('artists') }}">Artistes</a></li>
+                        <li class="{{ app.request.get('_route') == 'albums' ? 'active' }}"><a href="{{ path('albums') }}">Albums</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="{{ app.request.get('_route') == 'about' ? 'active' }}" style="margin-right: 10px"><a href="{{ path('about') }}">A Propos</a></li>

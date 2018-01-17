@@ -19,8 +19,8 @@
             <br/>
             <p><strong><big>Découvrez dès maintenant notre bibliothèque !</big></strong></p>
             <br/>
-            <a>Voir les artistes >></a>
-            <a>Voir les albums >></a>
+            <a href="{{ path('artists') }}">Voir les artistes >></a>
+            <a href="{{ path('albums') }}">Voir les albums >></a>
         </div>
     </div>
 {% endblock %}
@@ -28,13 +28,12 @@
     <style>
         h1.title
         {
-            color: #C9C9C9;
+            color: whitesmoke;
         }
         hr
         {
             display: block;
             border: none;
-            color: white;
             height: 2px;
             background: #C9C9C9;
         }
