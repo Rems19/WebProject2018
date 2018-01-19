@@ -79,10 +79,34 @@ class Musicien
     private $codeMusicien;
 
     /**
+     * @var Pays
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pays")
+     * @ORM\JoinColumn(name="Code_Pays", referencedColumnName="Code_Pays")
+     */
+    private $pays;
+
+    /**
+     * @var Genre
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Genre", inversedBy="musiciens")
+     * @ORM\JoinColumn(name="Code_Genre", referencedColumnName="Code_Genre")
+     */
+    private $genre;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Composer", mappedBy="musicien")
      * @ORM\JoinColumn(name="Code_Musicien", referencedColumnName="Code_Musicien")
      */
     private $compositions;
+
+    /**
+     * @var Instrument
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Instrument")
+     * @ORM\JoinColumn(name="Code_Instrument", referencedColumnName="Code_Instrument")
+     */
+    private $instrument;
 
     /**
      * @return string
@@ -282,6 +306,30 @@ class Musicien
     public function getCompositions()
     {
         return $this->compositions;
+    }
+
+    /**
+     * @return Pays
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
+
+    /**
+     * @return Genre
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * @return Instrument
+     */
+    public function getInstrument()
+    {
+        return $this->instrument;
     }
 
 

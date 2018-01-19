@@ -100,6 +100,20 @@ class Abonne implements UserInterface, \Serializable
     private $codeAbonne;
 
     /**
+     * @var Pays
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pays")
+     * @ORM\JoinColumn(name="Code_Pays", referencedColumnName="Code_Pays")
+     */
+    private $pays;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Achat", mappedBy="abonne")
+     * @ORM\JoinColumn(name="Code_Abonne", referencedColumnName="Code_Abonne")
+     */
+    private $achats;
+
+    /**
      * @return string
      */
     public function getNomAbonne()
@@ -369,5 +383,21 @@ class Abonne implements UserInterface, \Serializable
             $this->login,
             $this->password
         ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Pays
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAchats()
+    {
+        return $this->achats;
     }
 }

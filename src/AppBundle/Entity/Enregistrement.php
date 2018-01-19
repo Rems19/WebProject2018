@@ -55,7 +55,7 @@ class Enregistrement
     private $prix;
 
     /**
-     * @var binary
+     * @var resource
      *
      * @ORM\Column(name="Extrait", type="binary", nullable=true)
      */
@@ -70,7 +70,13 @@ class Enregistrement
      */
     private $codeMorceau;
 
-
+    /**
+     * @var Composition
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Composition", inversedBy="enregistrements")
+     * @ORM\JoinColumn(name="Code_Composition", referencedColumnName="Code_Composition")
+     */
+    private $composition;
 
     /**
      * Set titre
@@ -219,7 +225,7 @@ class Enregistrement
     /**
      * Set extrait
      *
-     * @param binary $extrait
+     * @param resource $extrait
      *
      * @return Enregistrement
      */
@@ -233,7 +239,7 @@ class Enregistrement
     /**
      * Get extrait
      *
-     * @return binary
+     * @return resource
      */
     public function getExtrait()
     {
@@ -248,5 +254,13 @@ class Enregistrement
     public function getCodeMorceau()
     {
         return $this->codeMorceau;
+    }
+
+    /**
+     * @return Composition
+     */
+    public function getComposition()
+    {
+        return $this->composition;
     }
 }

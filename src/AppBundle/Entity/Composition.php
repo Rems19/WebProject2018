@@ -42,7 +42,17 @@ class Composition
      */
     private $codeComposition;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Enregistrement", mappedBy="composition")
+     * @ORM\JoinColumn(name="Code_Composition", referencedColumnName="Code_Composition")
+     */
+    private $enregistrements;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CompositionOeuvre", mappedBy="composition")
+     * @ORM\JoinColumn(name="Code_Composition", referencedColumnName="Code_Composition")
+     */
+    private $compositions_oeuvres;
 
     /**
      * Set titreComposition
@@ -124,5 +134,21 @@ class Composition
     public function getCodeComposition()
     {
         return $this->codeComposition;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnregistrements()
+    {
+        return $this->enregistrements;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompositionsOeuvres()
+    {
+        return $this->compositions_oeuvres;
     }
 }

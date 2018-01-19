@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +64,37 @@ class Album
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $codeAlbum;
+
+    /**
+     * @var Genre
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Genre", inversedBy="albums")
+     * @ORM\JoinColumn(name="Code_Genre", referencedColumnName="Code_Genre")
+     */
+    private $genre;
+
+    /**
+     * @var Editeur
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Editeur", inversedBy="albums")
+     * @ORM\JoinColumn(name="Code_Editeur", referencedColumnName="Code_Editeur")
+     */
+    private $editeur;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Disque", mappedBy="album")
+     * @ORM\JoinColumn(name="Code_Album", referencedColumnName="Code_Album")
+     */
+    private $disques;
+
+    /**
+     * Album constructor.
+     */
+    public function __construct()
+    {
+        $this->disques = new ArrayCollection();
+    }
+
 
     /**
      * @return string
@@ -202,5 +235,29 @@ class Album
         $this->asin = $asin;
 
         return $this;
+    }
+
+    /**
+     * @return Editeur
+     */
+    public function getEditeur()
+    {
+        return $this->editeur;
+    }
+
+    /**
+     * @return Genre
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * @return Collection|Disque
+     */
+    public function getDisques()
+    {
+        return $this->disques;
     }
 }

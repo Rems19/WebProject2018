@@ -28,7 +28,17 @@ class Genre
      */
     private $codeGenre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Album", mappedBy="genre")
+     * @ORM\JoinColumn(name="Code_Genre", referencedColumnName="Code_Genre")
+     */
+    private $albums;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Musicien", mappedBy="genre")
+     * @ORM\JoinColumn(name="Code_Genre", referencedColumnName="Code_Genre")
+     */
+    private $musiciens;
 
     /**
      * Set libelleAbrege
@@ -62,5 +72,21 @@ class Genre
     public function getCodeGenre()
     {
         return $this->codeGenre;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlbums()
+    {
+        return $this->albums;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMusiciens()
+    {
+        return $this->musiciens;
     }
 }

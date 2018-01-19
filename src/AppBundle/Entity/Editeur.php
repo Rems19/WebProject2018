@@ -35,7 +35,19 @@ class Editeur
      */
     private $codeEditeur;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Album", mappedBy="editeur")
+     * @ORM\JoinColumn(name="Code_Editeur", referencedColumnName="Code_Editeur")
+     */
+    private $albums;
 
+    /**
+     * @var Pays
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pays")
+     * @ORM\JoinColumn(name="Code_Pays", referencedColumnName="Code_Pays")
+     */
+    private $pays;
 
     /**
      * Set nomEditeur
@@ -93,5 +105,21 @@ class Editeur
     public function getCodeEditeur()
     {
         return $this->codeEditeur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlbums()
+    {
+        return $this->albums;
+    }
+
+    /**
+     * @return Pays
+     */
+    public function getPays()
+    {
+        return $this->pays;
     }
 }

@@ -42,7 +42,19 @@ class Disque
      */
     private $codeDisque;
 
+    /**
+     * @var Album
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Album", inversedBy="disques")
+     * @ORM\JoinColumn(name="Code_Album", referencedColumnName="Code_Album")
+     */
+    private $album;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CompositionDisque", mappedBy="disque")
+     * @ORM\JoinColumn(name="Code_Disque", referencedColumnName="Code_Disque")
+     */
+    private $compositions;
 
     /**
      * Set codeAlbum
@@ -124,5 +136,21 @@ class Disque
     public function getCodeDisque()
     {
         return $this->codeDisque;
+    }
+
+    /**
+     * @return Album
+     */
+    public function getAlbum()
+    {
+        return $this->album;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompositions()
+    {
+        return $this->compositions;
     }
 }

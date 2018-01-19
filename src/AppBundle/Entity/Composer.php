@@ -36,10 +36,20 @@ class Composer
     private $codeComposer;
 
     /**
+     * @var Musicien
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Musicien", inversedBy="compositions")
      * @ORM\JoinColumn(name="Code_Musicien", referencedColumnName="Code_Musicien")
      */
     private $musicien;
+
+    /**
+     * @var Oeuvre
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Oeuvre", inversedBy="composer")
+     * @ORM\JoinColumn(name="Code_Oeuvre", referencedColumnName="Code_Oeuvre")
+     */
+    private $oeuvre;
 
     /**
      * @return Musicien
@@ -119,5 +129,13 @@ class Composer
         $this->musicien = $musicien;
 
         return $this;
+    }
+
+    /**
+     * @return Oeuvre
+     */
+    public function getOeuvre()
+    {
+        return $this->oeuvre;
     }
 }

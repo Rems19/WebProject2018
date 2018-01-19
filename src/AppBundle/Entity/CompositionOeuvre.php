@@ -35,7 +35,21 @@ class CompositionOeuvre
      */
     private $codeComposerOeuvre;
 
+    /**
+     * @var Oeuvre
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Oeuvre")
+     * @ORM\JoinColumn(name="Code_Oeuvre", referencedColumnName="Code_Oeuvre")
+     */
+    private $oeuvre;
 
+    /**
+     * @var Composition
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Composition", inversedBy="compositions_oeuvres")
+     * @ORM\JoinColumn(name="Code_Composition", referencedColumnName="Code_Composition")
+     */
+    private $composition;
 
     /**
      * Set codeOeuvre
@@ -93,5 +107,21 @@ class CompositionOeuvre
     public function getCodeComposerOeuvre()
     {
         return $this->codeComposerOeuvre;
+    }
+
+    /**
+     * @return Oeuvre
+     */
+    public function getOeuvre()
+    {
+        return $this->oeuvre;
+    }
+
+    /**
+     * @return Composition
+     */
+    public function getComposition()
+    {
+        return $this->composition;
     }
 }

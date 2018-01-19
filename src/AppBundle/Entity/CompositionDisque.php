@@ -42,7 +42,21 @@ class CompositionDisque
      */
     private $codeContenir;
 
+    /**
+     * @var Disque
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Disque", inversedBy="compositions")
+     * @ORM\JoinColumn(name="Code_Disque", referencedColumnName="Code_Disque")
+     */
+    private $disque;
 
+    /**
+     * @var Enregistrement
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Enregistrement")
+     * @ORM\JoinColumn(name="Code_Morceau", referencedColumnName="Code_Morceau")
+     */
+    private $enregistrement;
 
     /**
      * Set codeDisque
@@ -124,5 +138,21 @@ class CompositionDisque
     public function getCodeContenir()
     {
         return $this->codeContenir;
+    }
+
+    /**
+     * @return Disque
+     */
+    public function getDisque()
+    {
+        return $this->disque;
+    }
+
+    /**
+     * @return Disque
+     */
+    public function getEnregistrement()
+    {
+        return $this->enregistrement;
     }
 }

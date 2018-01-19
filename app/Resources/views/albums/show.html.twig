@@ -3,6 +3,8 @@
 {% block body %}
     <div class="album">
         <img src="data:image/jpeg;base64,{{ album.pochette }}">
+        {{ dump(album.disques) }}
+        {#<h3>{{ album.titreAlbum }} ({{ album.anneeAlbum }}) <small>Artiste : {{ album.disques[0].compositions[0].enregistrement.composition.compositionsOeuvres[0].oeuvre.composer.musicien.prenomNom }}</small></h3>#}
     </div>
 {% endblock %}
 

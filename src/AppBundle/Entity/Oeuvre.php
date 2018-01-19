@@ -70,7 +70,21 @@ class Oeuvre
      */
     private $codeOeuvre;
 
+    /**
+     * @var Composer
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Composer", inversedBy="oeuvre")
+     * @ORM\JoinColumn(name="Code_Oeuvre", referencedColumnName="Code_Oeuvre")
+     */
+    private $composer;
 
+    /**
+     * @var TypeMorceaux
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TypeMorceaux")
+     * @ORM\JoinColumn(name="Code_Type", referencedColumnName="Code_Type")
+     */
+    private $type;
 
     /**
      * Set titreOeuvre
@@ -248,5 +262,21 @@ class Oeuvre
     public function getCodeOeuvre()
     {
         return $this->codeOeuvre;
+    }
+
+    /**
+     * @return Composer
+     */
+    public function getComposer()
+    {
+        return $this->composer;
+    }
+
+    /**
+     * @return TypeMorceaux
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

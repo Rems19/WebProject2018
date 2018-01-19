@@ -42,7 +42,21 @@ class Achat
      */
     private $codeAchat;
 
+    /**
+     * @var Abonne
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Abonne", inversedBy="achats")
+     * @ORM\JoinColumn(name="Code_Abonne", referencedColumnName="Code_Abonne")
+     */
+    private $abonne;
 
+    /**
+     * @var Enregistrement
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Enregistrement")
+     * @ORM\JoinColumn(name="Code_Enregistrement", referencedColumnName="Code_Morceau")
+     */
+    private $enregistrement;
 
     /**
      * Set codeEnregistrement
@@ -124,5 +138,21 @@ class Achat
     public function getCodeAchat()
     {
         return $this->codeAchat;
+    }
+
+    /**
+     * @return Abonne
+     */
+    public function getAbonne()
+    {
+        return $this->abonne;
+    }
+
+    /**
+     * @return Enregistrement
+     */
+    public function getEnregistrement()
+    {
+        return $this->enregistrement;
     }
 }

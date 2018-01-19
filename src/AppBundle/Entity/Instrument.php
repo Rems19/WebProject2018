@@ -20,7 +20,7 @@ class Instrument
     private $nomInstrument;
 
     /**
-     * @var binary
+     * @var resource
      *
      * @ORM\Column(name="Image", type="binary", nullable=true)
      */
@@ -64,7 +64,7 @@ class Instrument
     /**
      * Set image
      *
-     * @param binary $image
+     * @param resource $image
      *
      * @return Instrument
      */
@@ -78,7 +78,7 @@ class Instrument
     /**
      * Get image
      *
-     * @return binary
+     * @return resource
      */
     public function getImage()
     {
