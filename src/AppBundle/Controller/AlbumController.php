@@ -67,6 +67,14 @@ class AlbumController extends Controller
      */
     public function showAction($codeAlbum)
     {
+        $album = $this->getDoctrine()->getRepository('AppBundle:Album')->find($codeAlbum);
 
+        return $this->render(':albums:show.html.twig', [
+            'page_head' => 'Albums',
+            'page_head_small' => 'Des centaines d\'albums à votre disposition',
+            'box_head' => $album->getTitreAlbum(),
+            'box_width' => '70%',
+            'album' => $album
+        ]);
     }
 }

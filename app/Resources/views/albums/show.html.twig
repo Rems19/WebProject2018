@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="album">
+        <img src="data:image/jpeg;base64,{{ album.pochette }}">
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .album
+        {
+            display: flex;
+        }
+        .album img
+        {
+            width: 400px;
+            padding-right: 20px;
+            border-right: 2px solid #555555;
+        }
+    </style>
+{% endblock %}
