@@ -71,5 +71,182 @@ class Enregistrement
     private $codeMorceau;
 
 
-}
 
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Enregistrement
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set codeComposition
+     *
+     * @param integer $codeComposition
+     *
+     * @return Enregistrement
+     */
+    public function setCodeComposition($codeComposition)
+    {
+        $this->codeComposition = $codeComposition;
+
+        return $this;
+    }
+
+    /**
+     * Get codeComposition
+     *
+     * @return integer
+     */
+    public function getCodeComposition()
+    {
+        return $this->codeComposition;
+    }
+
+    /**
+     * Set nomDeFichier
+     *
+     * @param string $nomDeFichier
+     *
+     * @return Enregistrement
+     */
+    public function setNomDeFichier($nomDeFichier)
+    {
+        $this->nomDeFichier = $nomDeFichier;
+
+        return $this;
+    }
+
+    /**
+     * Get nomDeFichier
+     *
+     * @return string
+     */
+    public function getNomDeFichier()
+    {
+        return $this->nomDeFichier;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param string $duree
+     *
+     * @return Enregistrement
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return string
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * Set dureeSeconde
+     *
+     * @param integer $dureeSeconde
+     *
+     * @return Enregistrement
+     */
+    public function setDureeSeconde($dureeSeconde)
+    {
+        $this->dureeSeconde = $dureeSeconde;
+
+        return $this;
+    }
+
+    /**
+     * Get dureeSeconde
+     *
+     * @return integer
+     */
+    public function getDureeSeconde()
+    {
+        return $this->dureeSeconde;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param integer $prix
+     *
+     * @return Enregistrement
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return integer
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set extrait
+     *
+     * @param binary $extrait
+     *
+     * @return Enregistrement
+     */
+    public function setExtrait($extrait)
+    {
+        $this->extrait = $extrait;
+
+        return $this;
+    }
+
+    /**
+     * Get extrait
+     *
+     * @return binary
+     */
+    public function getExtrait()
+    {
+        return $this->extrait;
+    }
+
+    /**
+     * Get codeMorceau
+     *
+     * @return integer
+     */
+    public function getCodeMorceau()
+    {
+        return $this->codeMorceau;
+    }
+}

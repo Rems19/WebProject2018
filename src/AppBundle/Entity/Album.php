@@ -41,7 +41,7 @@ class Album
     private $codeEditeur;
 
     /**
-     * @var binary
+     * @var resource
      *
      * @ORM\Column(name="Pochette", type="binary", nullable=true)
      */
@@ -63,6 +63,144 @@ class Album
      */
     private $codeAlbum;
 
+    /**
+     * @return string
+     */
+    public function getTitreAlbum()
+    {
+        return $this->titreAlbum;
+    }
 
+    /**
+     * @return int
+     */
+    public function getAnneeAlbum()
+    {
+        return $this->anneeAlbum;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodeGenre()
+    {
+        return $this->codeGenre;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodeEditeur()
+    {
+        return $this->codeEditeur;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPochette()
+    {
+        return base64_encode(stream_get_contents($this->pochette));
+    }
+
+    /**
+     * @return string
+     */
+    public function getAsin()
+    {
+        return $this->asin;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodeAlbum()
+    {
+        return $this->codeAlbum;
+    }
+
+
+    /**
+     * Set titreAlbum
+     *
+     * @param string $titreAlbum
+     *
+     * @return Album
+     */
+    public function setTitreAlbum($titreAlbum)
+    {
+        $this->titreAlbum = $titreAlbum;
+
+        return $this;
+    }
+
+    /**
+     * Set anneeAlbum
+     *
+     * @param integer $anneeAlbum
+     *
+     * @return Album
+     */
+    public function setAnneeAlbum($anneeAlbum)
+    {
+        $this->anneeAlbum = $anneeAlbum;
+
+        return $this;
+    }
+
+    /**
+     * Set codeGenre
+     *
+     * @param integer $codeGenre
+     *
+     * @return Album
+     */
+    public function setCodeGenre($codeGenre)
+    {
+        $this->codeGenre = $codeGenre;
+
+        return $this;
+    }
+
+    /**
+     * Set codeEditeur
+     *
+     * @param integer $codeEditeur
+     *
+     * @return Album
+     */
+    public function setCodeEditeur($codeEditeur)
+    {
+        $this->codeEditeur = $codeEditeur;
+
+        return $this;
+    }
+
+    /**
+     * Set pochette
+     *
+     * @param binary $pochette
+     *
+     * @return Album
+     */
+    public function setPochette($pochette)
+    {
+        $this->pochette = $pochette;
+
+        return $this;
+    }
+
+    /**
+     * Set asin
+     *
+     * @param string $asin
+     *
+     * @return Album
+     */
+    public function setAsin($asin)
+    {
+        $this->asin = $asin;
+
+        return $this;
+    }
 }
-

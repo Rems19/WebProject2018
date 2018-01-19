@@ -36,5 +36,62 @@ class CompositionOeuvre
     private $codeComposerOeuvre;
 
 
-}
 
+    /**
+     * Set codeOeuvre
+     *
+     * @param integer $codeOeuvre
+     *
+     * @return CompositionOeuvre
+     */
+    public function setCodeOeuvre($codeOeuvre)
+    {
+        $this->codeOeuvre = $codeOeuvre;
+
+        return $this;
+    }
+
+    /**
+     * Get codeOeuvre
+     *
+     * @return integer
+     */
+    public function getCodeOeuvre()
+    {
+        return $this->codeOeuvre;
+    }
+
+    /**
+     * Set codeComposition
+     *
+     * @param integer $codeComposition
+     *
+     * @return CompositionOeuvre
+     */
+    public function setCodeComposition($codeComposition)
+    {
+        $this->codeComposition = $codeComposition;
+
+        return $this;
+    }
+
+    /**
+     * Get codeComposition
+     *
+     * @return integer
+     */
+    public function getCodeComposition()
+    {
+        return $this->codeComposition;
+    }
+
+    /**
+     * Get codeComposerOeuvre
+     *
+     * @return integer
+     */
+    public function getCodeComposerOeuvre()
+    {
+        return $this->codeComposerOeuvre;
+    }
+}

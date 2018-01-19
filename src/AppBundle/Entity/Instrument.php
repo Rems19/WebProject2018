@@ -36,5 +36,62 @@ class Instrument
     private $codeInstrument;
 
 
-}
 
+    /**
+     * Set nomInstrument
+     *
+     * @param string $nomInstrument
+     *
+     * @return Instrument
+     */
+    public function setNomInstrument($nomInstrument)
+    {
+        $this->nomInstrument = $nomInstrument;
+
+        return $this;
+    }
+
+    /**
+     * Get nomInstrument
+     *
+     * @return string
+     */
+    public function getNomInstrument()
+    {
+        return $this->nomInstrument;
+    }
+
+    /**
+     * Set image
+     *
+     * @param binary $image
+     *
+     * @return Instrument
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return binary
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Get codeInstrument
+     *
+     * @return integer
+     */
+    public function getCodeInstrument()
+    {
+        return $this->codeInstrument;
+    }
+}

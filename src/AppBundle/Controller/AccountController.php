@@ -31,7 +31,11 @@ class AccountController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
         return $this->render(':security:login.html.twig', [
-            'error' => $authUtils->getLastAuthenticationError()
+            'error' => $authUtils->getLastAuthenticationError(),
+            'page_head' => 'Connexion',
+            'page_head_small' => 'Connectez-vous à votre compte Alib\'Album',
+            'box_head' => 'Connexion',
+            'box_width' => '30%',
         ]);
     }
 
@@ -94,7 +98,11 @@ class AccountController extends Controller
         usort($countries, function (Pays $a, Pays $b) { return strcmp($a->getNomPays(), $b->getNomPays()); });
         return $this->render(':security:register.html.twig', [
             'errors' => empty($errors) ? null : $errors,
-            'countries' => $countries
+            'countries' => $countries,
+            'page_head' => 'Inscription',
+            'page_head_small' => 'Créez votre compte Alib\'Album',
+            'box_head' => 'Inscription',
+            'box_width' => '50%',
         ]);
     }
 }

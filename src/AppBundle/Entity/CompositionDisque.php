@@ -43,5 +43,86 @@ class CompositionDisque
     private $codeContenir;
 
 
-}
 
+    /**
+     * Set codeDisque
+     *
+     * @param integer $codeDisque
+     *
+     * @return CompositionDisque
+     */
+    public function setCodeDisque($codeDisque)
+    {
+        $this->codeDisque = $codeDisque;
+
+        return $this;
+    }
+
+    /**
+     * Get codeDisque
+     *
+     * @return integer
+     */
+    public function getCodeDisque()
+    {
+        return $this->codeDisque;
+    }
+
+    /**
+     * Set codeMorceau
+     *
+     * @param integer $codeMorceau
+     *
+     * @return CompositionDisque
+     */
+    public function setCodeMorceau($codeMorceau)
+    {
+        $this->codeMorceau = $codeMorceau;
+
+        return $this;
+    }
+
+    /**
+     * Get codeMorceau
+     *
+     * @return integer
+     */
+    public function getCodeMorceau()
+    {
+        return $this->codeMorceau;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return CompositionDisque
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Get codeContenir
+     *
+     * @return integer
+     */
+    public function getCodeContenir()
+    {
+        return $this->codeContenir;
+    }
+}

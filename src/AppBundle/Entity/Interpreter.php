@@ -43,5 +43,86 @@ class Interpreter
     private $codeInterpreter;
 
 
-}
 
+    /**
+     * Set codeMorceau
+     *
+     * @param integer $codeMorceau
+     *
+     * @return Interpreter
+     */
+    public function setCodeMorceau($codeMorceau)
+    {
+        $this->codeMorceau = $codeMorceau;
+
+        return $this;
+    }
+
+    /**
+     * Get codeMorceau
+     *
+     * @return integer
+     */
+    public function getCodeMorceau()
+    {
+        return $this->codeMorceau;
+    }
+
+    /**
+     * Set codeMusicien
+     *
+     * @param integer $codeMusicien
+     *
+     * @return Interpreter
+     */
+    public function setCodeMusicien($codeMusicien)
+    {
+        $this->codeMusicien = $codeMusicien;
+
+        return $this;
+    }
+
+    /**
+     * Get codeMusicien
+     *
+     * @return integer
+     */
+    public function getCodeMusicien()
+    {
+        return $this->codeMusicien;
+    }
+
+    /**
+     * Set codeInstrument
+     *
+     * @param integer $codeInstrument
+     *
+     * @return Interpreter
+     */
+    public function setCodeInstrument($codeInstrument)
+    {
+        $this->codeInstrument = $codeInstrument;
+
+        return $this;
+    }
+
+    /**
+     * Get codeInstrument
+     *
+     * @return integer
+     */
+    public function getCodeInstrument()
+    {
+        return $this->codeInstrument;
+    }
+
+    /**
+     * Get codeInterpreter
+     *
+     * @return integer
+     */
+    public function getCodeInterpreter()
+    {
+        return $this->codeInterpreter;
+    }
+}

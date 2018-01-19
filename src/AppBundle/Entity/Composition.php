@@ -43,5 +43,86 @@ class Composition
     private $codeComposition;
 
 
-}
 
+    /**
+     * Set titreComposition
+     *
+     * @param string $titreComposition
+     *
+     * @return Composition
+     */
+    public function setTitreComposition($titreComposition)
+    {
+        $this->titreComposition = $titreComposition;
+
+        return $this;
+    }
+
+    /**
+     * Get titreComposition
+     *
+     * @return string
+     */
+    public function getTitreComposition()
+    {
+        return $this->titreComposition;
+    }
+
+    /**
+     * Set annee
+     *
+     * @param integer $annee
+     *
+     * @return Composition
+     */
+    public function setAnnee($annee)
+    {
+        $this->annee = $annee;
+
+        return $this;
+    }
+
+    /**
+     * Get annee
+     *
+     * @return integer
+     */
+    public function getAnnee()
+    {
+        return $this->annee;
+    }
+
+    /**
+     * Set composanteComposition
+     *
+     * @param string $composanteComposition
+     *
+     * @return Composition
+     */
+    public function setComposanteComposition($composanteComposition)
+    {
+        $this->composanteComposition = $composanteComposition;
+
+        return $this;
+    }
+
+    /**
+     * Get composanteComposition
+     *
+     * @return string
+     */
+    public function getComposanteComposition()
+    {
+        return $this->composanteComposition;
+    }
+
+    /**
+     * Get codeComposition
+     *
+     * @return integer
+     */
+    public function getCodeComposition()
+    {
+        return $this->codeComposition;
+    }
+}

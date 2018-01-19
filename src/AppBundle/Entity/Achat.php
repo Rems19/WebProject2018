@@ -43,5 +43,86 @@ class Achat
     private $codeAchat;
 
 
-}
 
+    /**
+     * Set codeEnregistrement
+     *
+     * @param integer $codeEnregistrement
+     *
+     * @return Achat
+     */
+    public function setCodeEnregistrement($codeEnregistrement)
+    {
+        $this->codeEnregistrement = $codeEnregistrement;
+
+        return $this;
+    }
+
+    /**
+     * Get codeEnregistrement
+     *
+     * @return integer
+     */
+    public function getCodeEnregistrement()
+    {
+        return $this->codeEnregistrement;
+    }
+
+    /**
+     * Set codeAbonne
+     *
+     * @param integer $codeAbonne
+     *
+     * @return Achat
+     */
+    public function setCodeAbonne($codeAbonne)
+    {
+        $this->codeAbonne = $codeAbonne;
+
+        return $this;
+    }
+
+    /**
+     * Get codeAbonne
+     *
+     * @return integer
+     */
+    public function getCodeAbonne()
+    {
+        return $this->codeAbonne;
+    }
+
+    /**
+     * Set achatConfirme
+     *
+     * @param boolean $achatConfirme
+     *
+     * @return Achat
+     */
+    public function setAchatConfirme($achatConfirme)
+    {
+        $this->achatConfirme = $achatConfirme;
+
+        return $this;
+    }
+
+    /**
+     * Get achatConfirme
+     *
+     * @return boolean
+     */
+    public function getAchatConfirme()
+    {
+        return $this->achatConfirme;
+    }
+
+    /**
+     * Get codeAchat
+     *
+     * @return integer
+     */
+    public function getCodeAchat()
+    {
+        return $this->codeAchat;
+    }
+}

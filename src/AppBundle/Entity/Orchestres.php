@@ -29,5 +29,38 @@ class Orchestres
     private $codeOrchestre;
 
 
-}
 
+    /**
+     * Set nomOrchestre
+     *
+     * @param string $nomOrchestre
+     *
+     * @return Orchestres
+     */
+    public function setNomOrchestre($nomOrchestre)
+    {
+        $this->nomOrchestre = $nomOrchestre;
+
+        return $this;
+    }
+
+    /**
+     * Get nomOrchestre
+     *
+     * @return string
+     */
+    public function getNomOrchestre()
+    {
+        return $this->nomOrchestre;
+    }
+
+    /**
+     * Get codeOrchestre
+     *
+     * @return integer
+     */
+    public function getCodeOrchestre()
+    {
+        return $this->codeOrchestre;
+    }
+}

@@ -53,5 +53,18 @@ class Pays
     }
 
 
-}
 
+    /**
+     * Set nomPays
+     *
+     * @param string $nomPays
+     *
+     * @return Pays
+     */
+    public function setNomPays($nomPays)
+    {
+        $this->nomPays = $nomPays;
+
+        return $this;
+    }
+}

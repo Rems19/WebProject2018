@@ -371,4 +371,3 @@ class Abonne implements UserInterface, \Serializable
         ) = unserialize($serialized);
     }
 }
-

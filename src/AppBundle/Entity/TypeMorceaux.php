@@ -36,5 +36,62 @@ class TypeMorceaux
     private $codeType;
 
 
-}
 
+    /**
+     * Set libelleType
+     *
+     * @param string $libelleType
+     *
+     * @return TypeMorceaux
+     */
+    public function setLibelleType($libelleType)
+    {
+        $this->libelleType = $libelleType;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleType
+     *
+     * @return string
+     */
+    public function getLibelleType()
+    {
+        return $this->libelleType;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return TypeMorceaux
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Get codeType
+     *
+     * @return integer
+     */
+    public function getCodeType()
+    {
+        return $this->codeType;
+    }
+}

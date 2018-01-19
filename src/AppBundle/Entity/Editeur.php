@@ -36,5 +36,62 @@ class Editeur
     private $codeEditeur;
 
 
-}
 
+    /**
+     * Set nomEditeur
+     *
+     * @param string $nomEditeur
+     *
+     * @return Editeur
+     */
+    public function setNomEditeur($nomEditeur)
+    {
+        $this->nomEditeur = $nomEditeur;
+
+        return $this;
+    }
+
+    /**
+     * Get nomEditeur
+     *
+     * @return string
+     */
+    public function getNomEditeur()
+    {
+        return $this->nomEditeur;
+    }
+
+    /**
+     * Set codePays
+     *
+     * @param integer $codePays
+     *
+     * @return Editeur
+     */
+    public function setCodePays($codePays)
+    {
+        $this->codePays = $codePays;
+
+        return $this;
+    }
+
+    /**
+     * Get codePays
+     *
+     * @return integer
+     */
+    public function getCodePays()
+    {
+        return $this->codePays;
+    }
+
+    /**
+     * Get codeEditeur
+     *
+     * @return integer
+     */
+    public function getCodeEditeur()
+    {
+        return $this->codeEditeur;
+    }
+}

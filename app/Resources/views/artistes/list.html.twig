@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form class="search-group">
+        <input class="search-field" type="text" name="q" placeholder="Rechercher..." value="{{ q }}">
+        <button><span class="glyphicon glyphicon-search"></span></button>
+        <span class="info">Total : {{ total }} Artistes - Affichés : {{ (page - 1) * 10 + 1 }}-{{ min(page * 10, total) }} (Page {{ page }})</span>
+    </form>
+    <div id="artistes">
+        <a class="arrow-link {% if page == 1 %} disabled {% endif %}" href="?page={{ page - 1 }}{% if q %}&q={{ q }}{% endif %}">&lt;</a>
+        <div id="artistes-content">
+            {% for artiste in artistes %}
+                <div class="artiste" onclick="location.href='{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}'">
+                    <img src="data:image/jpeg;base64,{{ artiste.photo }}">
+                    <small>{{ artiste.nomPrenom }}</small>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="arrow-link {% if not hasNextPage %} disabled {% endif %}" href="?page={{ page + 1 }}{% if q %}&q={{ q }}{% endif %}">&gt;</a>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .search-group
+        {
+            display: flex;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .search-group > .search-field
+        {
+            border-radius: 5px 0 0 5px;
+            border-style: solid;
+            border-color: #C9C9C9;
+            border-width: 1px 0 1px 1px;
+            color: #444444;
+        }
+        .search-group > button
+        {
+            border-radius: 0 5px 5px 0;
+            border-style: solid;
+            border-color: #C9C9C9;
+            border-width: 1px 1px 1px 0;
+        }
+        .search-group > button:hover
+        {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        .search-group .info
+        {
+            margin-left: 20px;
+        }
+        #artistes
+        {
+            display: flex;
+            align-items: center;
+        }
+        #artistes-content
+        {
+            flex-grow: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .artiste
+        {
+            width: 18%;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 15px 5px 5px 5px;
+            cursor: pointer;
+        }
+        .artiste:not(:nth-child(5n))
+        {
+            margin-right: 2%;
+        }
+        .artiste:hover
+        {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .artiste > img
+        {
+            width: 80%;
+        }
+        a.arrow-link:before
+        {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+        a.arrow-link
+        {
+            display: inline-block;
+            vertical-align: middle;
+            align-self: stretch;
+            padding: 15px;
+            margin: 0 10px 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: inherit;
+            text-decoration: inherit;
+            line-height: 100%;
+            text-align: center;
+            font-size: 3em;
+            outline: 0;
+        }
+        a.arrow-link:hover
+        {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        a.arrow-link:last-of-type
+        {
+            margin: 0 0 0 10px;
+        }
+        a.arrow-link.disabled
+        {
+            display: none;
+        }
+    </style>
+{% endblock %}

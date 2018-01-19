@@ -35,6 +35,89 @@ class Composer
      */
     private $codeComposer;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Musicien", inversedBy="compositions")
+     * @ORM\JoinColumn(name="Code_Musicien", referencedColumnName="Code_Musicien")
+     */
+    private $musicien;
 
+    /**
+     * @return Musicien
+     */
+    public function getMusicien()
+    {
+        return $this->musicien;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodeMusicien()
+    {
+        return $this->codeMusicien;
+    }
+
+
+
+    /**
+     * Set codeMusicien
+     *
+     * @param integer $codeMusicien
+     *
+     * @return Composer
+     */
+    public function setCodeMusicien($codeMusicien)
+    {
+        $this->codeMusicien = $codeMusicien;
+
+        return $this;
+    }
+
+    /**
+     * Set codeOeuvre
+     *
+     * @param integer $codeOeuvre
+     *
+     * @return Composer
+     */
+    public function setCodeOeuvre($codeOeuvre)
+    {
+        $this->codeOeuvre = $codeOeuvre;
+
+        return $this;
+    }
+
+    /**
+     * Get codeOeuvre
+     *
+     * @return integer
+     */
+    public function getCodeOeuvre()
+    {
+        return $this->codeOeuvre;
+    }
+
+    /**
+     * Get codeComposer
+     *
+     * @return integer
+     */
+    public function getCodeComposer()
+    {
+        return $this->codeComposer;
+    }
+
+    /**
+     * Set musicien
+     *
+     * @param Musicien $musicien
+     *
+     * @return Composer
+     */
+    public function setMusicien(Musicien $musicien = null)
+    {
+        $this->musicien = $musicien;
+
+        return $this;
+    }
 }
-

@@ -15,40 +15,17 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
         <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="{{ asset('css/base.css') }}">
         <style>
-            html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
-            body
-            {
-                font: 18px/1.5 'Open Sans', sans-serif;
-                display: flex;
-                flex-flow: column;
-                background: url("{{ asset('img/bg.png') }}") fixed;
-                padding-top: 50px;
-            }
-            .navbar
-            {
-                flex: 0 0 auto;
-            }
-            p { margin: 0 0 1em 0; }
-            a { color: #0000F0; }
-            a:hover { text-decoration: none; }
-            code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
-            button.navbar-btn { margin-right: 10px; }
-            .container
-            {
-                width: 100%;
-                height: 100%;
-                flex: 1 1 auto;
-                display: flex;
-                flex-flow: column;
-            }
+            html { background: url("{{ asset('img/bg.png') }}") fixed; }
+            .box { width: {{ box_width|default('50%') }}; }
         </style>
         {% block stylesheets %}{% endblock %}
     </head>
 
     <body>
 
-        <nav class="navbar navbar-inverse navbar-static-top navbar-fixed-top" style="margin-bottom: 0">
+        <nav class="navbar navbar-inverse" style="margin-bottom: 0">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-container-collapse" aria-expanded="false" aria-controls="navbar">
@@ -90,9 +67,15 @@
         </nav>
 
         <div class="container">
-
-            {% block body %}{% endblock %}
-
+            <h1 class="text-center title">{{ page_head }}{% if page_head_small is defined %} | <small>{{ page_head_small }}</small>{% endif %}</h1>
+            <hr class="center">
+            <div class="content">
+                <div class="box">
+                    <h2>{{ box_head }}</h2>
+                    <hr class="left">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
         </div><!-- /.container -->
 
         <!-- Bootstrap core JavaScript

@@ -71,5 +71,182 @@ class Oeuvre
     private $codeOeuvre;
 
 
-}
 
+    /**
+     * Set titreOeuvre
+     *
+     * @param string $titreOeuvre
+     *
+     * @return Oeuvre
+     */
+    public function setTitreOeuvre($titreOeuvre)
+    {
+        $this->titreOeuvre = $titreOeuvre;
+
+        return $this;
+    }
+
+    /**
+     * Get titreOeuvre
+     *
+     * @return string
+     */
+    public function getTitreOeuvre()
+    {
+        return $this->titreOeuvre;
+    }
+
+    /**
+     * Set sousTitre
+     *
+     * @param string $sousTitre
+     *
+     * @return Oeuvre
+     */
+    public function setSousTitre($sousTitre)
+    {
+        $this->sousTitre = $sousTitre;
+
+        return $this;
+    }
+
+    /**
+     * Get sousTitre
+     *
+     * @return string
+     */
+    public function getSousTitre()
+    {
+        return $this->sousTitre;
+    }
+
+    /**
+     * Set tonalite
+     *
+     * @param string $tonalite
+     *
+     * @return Oeuvre
+     */
+    public function setTonalite($tonalite)
+    {
+        $this->tonalite = $tonalite;
+
+        return $this;
+    }
+
+    /**
+     * Get tonalite
+     *
+     * @return string
+     */
+    public function getTonalite()
+    {
+        return $this->tonalite;
+    }
+
+    /**
+     * Set codeType
+     *
+     * @param integer $codeType
+     *
+     * @return Oeuvre
+     */
+    public function setCodeType($codeType)
+    {
+        $this->codeType = $codeType;
+
+        return $this;
+    }
+
+    /**
+     * Get codeType
+     *
+     * @return integer
+     */
+    public function getCodeType()
+    {
+        return $this->codeType;
+    }
+
+    /**
+     * Set annee
+     *
+     * @param integer $annee
+     *
+     * @return Oeuvre
+     */
+    public function setAnnee($annee)
+    {
+        $this->annee = $annee;
+
+        return $this;
+    }
+
+    /**
+     * Get annee
+     *
+     * @return integer
+     */
+    public function getAnnee()
+    {
+        return $this->annee;
+    }
+
+    /**
+     * Set opus
+     *
+     * @param string $opus
+     *
+     * @return Oeuvre
+     */
+    public function setOpus($opus)
+    {
+        $this->opus = $opus;
+
+        return $this;
+    }
+
+    /**
+     * Get opus
+     *
+     * @return string
+     */
+    public function getOpus()
+    {
+        return $this->opus;
+    }
+
+    /**
+     * Set numeroOpus
+     *
+     * @param integer $numeroOpus
+     *
+     * @return Oeuvre
+     */
+    public function setNumeroOpus($numeroOpus)
+    {
+        $this->numeroOpus = $numeroOpus;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroOpus
+     *
+     * @return integer
+     */
+    public function getNumeroOpus()
+    {
+        return $this->numeroOpus;
+    }
+
+    /**
+     * Get codeOeuvre
+     *
+     * @return integer
+     */
+    public function getCodeOeuvre()
+    {
+        return $this->codeOeuvre;
+    }
+}

@@ -43,5 +43,86 @@ class Direction
     private $codeDirection;
 
 
-}
 
+    /**
+     * Set codeMusicien
+     *
+     * @param integer $codeMusicien
+     *
+     * @return Direction
+     */
+    public function setCodeMusicien($codeMusicien)
+    {
+        $this->codeMusicien = $codeMusicien;
+
+        return $this;
+    }
+
+    /**
+     * Get codeMusicien
+     *
+     * @return integer
+     */
+    public function getCodeMusicien()
+    {
+        return $this->codeMusicien;
+    }
+
+    /**
+     * Set codeMorceau
+     *
+     * @param integer $codeMorceau
+     *
+     * @return Direction
+     */
+    public function setCodeMorceau($codeMorceau)
+    {
+        $this->codeMorceau = $codeMorceau;
+
+        return $this;
+    }
+
+    /**
+     * Get codeMorceau
+     *
+     * @return integer
+     */
+    public function getCodeMorceau()
+    {
+        return $this->codeMorceau;
+    }
+
+    /**
+     * Set codeOrchestre
+     *
+     * @param integer $codeOrchestre
+     *
+     * @return Direction
+     */
+    public function setCodeOrchestre($codeOrchestre)
+    {
+        $this->codeOrchestre = $codeOrchestre;
+
+        return $this;
+    }
+
+    /**
+     * Get codeOrchestre
+     *
+     * @return integer
+     */
+    public function getCodeOrchestre()
+    {
+        return $this->codeOrchestre;
+    }
+
+    /**
+     * Get codeDirection
+     *
+     * @return integer
+     */
+    public function getCodeDirection()
+    {
+        return $this->codeDirection;
+    }
+}

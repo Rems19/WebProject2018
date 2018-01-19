@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 /**
  * Musicien
@@ -62,7 +63,7 @@ class Musicien
     private $codeInstrument;
 
     /**
-     * @var binary
+     * @var resource
      *
      * @ORM\Column(name="Photo", type="binary", nullable=true)
      */
@@ -77,6 +78,211 @@ class Musicien
      */
     private $codeMusicien;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Composer", mappedBy="musicien")
+     * @ORM\JoinColumn(name="Code_Musicien", referencedColumnName="Code_Musicien")
+     */
+    private $compositions;
+
+    /**
+     * @return string
+     */
+    public function getNomMusicien()
+    {
+        return $this->nomMusicien;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrenomMusicien()
+    {
+        return $this->prenomMusicien;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnneeNaissance()
+    {
+        return $this->anneeNaissance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnneeMort()
+    {
+        return $this->anneeMort;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodePays()
+    {
+        return $this->codePays;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodeGenre()
+    {
+        return $this->codeGenre;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodeInstrument()
+    {
+        return $this->codeInstrument;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return base64_encode(stream_get_contents($this->photo));
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodeMusicien()
+    {
+        return $this->codeMusicien;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomPrenom()
+    {
+        return $this->nomMusicien . ' ' . $this->prenomMusicien;
+    }
+
+    /**
+     * Set nomMusicien
+     *
+     * @param string $nomMusicien
+     *
+     * @return Musicien
+     */
+    public function setNomMusicien($nomMusicien)
+    {
+        $this->nomMusicien = $nomMusicien;
+
+        return $this;
+    }
+
+    /**
+     * Set prenomMusicien
+     *
+     * @param string $prenomMusicien
+     *
+     * @return Musicien
+     */
+    public function setPrenomMusicien($prenomMusicien)
+    {
+        $this->prenomMusicien = $prenomMusicien;
+
+        return $this;
+    }
+
+    /**
+     * Set anneeNaissance
+     *
+     * @param integer $anneeNaissance
+     *
+     * @return Musicien
+     */
+    public function setAnneeNaissance($anneeNaissance)
+    {
+        $this->anneeNaissance = $anneeNaissance;
+
+        return $this;
+    }
+
+    /**
+     * Set anneeMort
+     *
+     * @param integer $anneeMort
+     *
+     * @return Musicien
+     */
+    public function setAnneeMort($anneeMort)
+    {
+        $this->anneeMort = $anneeMort;
+
+        return $this;
+    }
+
+    /**
+     * Set codePays
+     *
+     * @param integer $codePays
+     *
+     * @return Musicien
+     */
+    public function setCodePays($codePays)
+    {
+        $this->codePays = $codePays;
+
+        return $this;
+    }
+
+    /**
+     * Set codeGenre
+     *
+     * @param integer $codeGenre
+     *
+     * @return Musicien
+     */
+    public function setCodeGenre($codeGenre)
+    {
+        $this->codeGenre = $codeGenre;
+
+        return $this;
+    }
+
+    /**
+     * Set codeInstrument
+     *
+     * @param integer $codeInstrument
+     *
+     * @return Musicien
+     */
+    public function setCodeInstrument($codeInstrument)
+    {
+        $this->codeInstrument = $codeInstrument;
+
+        return $this;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param resource $photo
+     *
+     * @return Musicien
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompositions()
+    {
+        return $this->compositions;
+    }
+
 
 }
-

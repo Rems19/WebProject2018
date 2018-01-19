@@ -12,7 +12,10 @@ class DefaultController extends Controller
      */
     public function homeAction()
     {
-        return $this->render('home.html.twig');
+        return $this->render('home.html.twig', [
+            'page_head' => 'Découvrez le meilleur de la musique !',
+            'box_head' => 'Notre but ?'
+        ]);
     }
 
     /**
@@ -21,16 +24,5 @@ class DefaultController extends Controller
     public function indexAction()
     {
         return $this->render('about.html.twig');
-    }
-
-    /**
-     * @Route("/symfony_index", name="symfony")
-     */
-    public function symfonyAction()
-    {
-        // replace this example code with whatever you need
-        return $this->render(':default:index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
     }
 }

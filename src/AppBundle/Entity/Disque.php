@@ -43,5 +43,86 @@ class Disque
     private $codeDisque;
 
 
-}
 
+    /**
+     * Set codeAlbum
+     *
+     * @param integer $codeAlbum
+     *
+     * @return Disque
+     */
+    public function setCodeAlbum($codeAlbum)
+    {
+        $this->codeAlbum = $codeAlbum;
+
+        return $this;
+    }
+
+    /**
+     * Get codeAlbum
+     *
+     * @return integer
+     */
+    public function getCodeAlbum()
+    {
+        return $this->codeAlbum;
+    }
+
+    /**
+     * Set referenceAlbum
+     *
+     * @param string $referenceAlbum
+     *
+     * @return Disque
+     */
+    public function setReferenceAlbum($referenceAlbum)
+    {
+        $this->referenceAlbum = $referenceAlbum;
+
+        return $this;
+    }
+
+    /**
+     * Get referenceAlbum
+     *
+     * @return string
+     */
+    public function getReferenceAlbum()
+    {
+        return $this->referenceAlbum;
+    }
+
+    /**
+     * Set referenceDisque
+     *
+     * @param string $referenceDisque
+     *
+     * @return Disque
+     */
+    public function setReferenceDisque($referenceDisque)
+    {
+        $this->referenceDisque = $referenceDisque;
+
+        return $this;
+    }
+
+    /**
+     * Get referenceDisque
+     *
+     * @return string
+     */
+    public function getReferenceDisque()
+    {
+        return $this->referenceDisque;
+    }
+
+    /**
+     * Get codeDisque
+     *
+     * @return integer
+     */
+    public function getCodeDisque()
+    {
+        return $this->codeDisque;
+    }
+}
