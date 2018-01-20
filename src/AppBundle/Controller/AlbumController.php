@@ -23,21 +23,25 @@ class AlbumController extends Controller
         /** @var EntityRepository $albumRepo */
         $albumRepo = $this->getDoctrine()->getRepository('AppBundle:Album');
 
-        $page = $request->query->getInt('page', 1);
-
         $criteria = Criteria::create();
 
-        if ($request->query->has('q')) {
-            $q = $request->query->getAlnum('q', null);
+        $q = $request->query->getAlnum('q', null);
+        if ($q != null) {
             $criteria->andWhere(Criteria::expr()->startsWith('titreAlbum', $q));
         }
+
+        $totalCount = $ep->count($criteria);
+        $maxPage = ceil($totalCount / 10.0);
+
+        $page = $request->query->getInt('page', 1);
+        if ($page < 1) return $this->redirect("?".($q != null ? "q=$q&" : "")."page=1");
+        else if ($page > $maxPage) return $this->redirect("?".($q != null ? "q=$q&" : "")."page=$maxPage");
 
         $albums = $albumRepo->matching($criteria
             ->orderBy(['titreAlbum' => 'ASC'])
             ->setFirstResult(10 * ($page - 1))
             ->setMaxResults(10)
         );
-        $totalCount = $ep->count($criteria);
 
         $hasNextPage = $totalCount > 10 * $page;
 

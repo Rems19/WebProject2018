@@ -3,7 +3,7 @@ app:
     type: annotation
 
 artists:
-    resource: '@AppBundle/Controller/ArtistController.php'
+    resource: '@AppBundle/Controller/ArtisteController.php'
     type: annotation
     prefix: /artists
 

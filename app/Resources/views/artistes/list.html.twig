@@ -12,7 +12,7 @@
             {% for artiste in artistes %}
                 <div class="artiste" onclick="location.href='{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}'">
                     <img src="data:image/jpeg;base64,{{ artiste.photo }}">
-                    <small>{{ artiste.nomPrenom }}</small>
+                    <small>{{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}</small>
                 </div>
             {% endfor %}
         </div>
@@ -31,17 +31,15 @@
         .search-group > .search-field
         {
             border-radius: 5px 0 0 5px;
-            border-style: solid;
-            border-color: #C9C9C9;
-            border-width: 1px 0 1px 1px;
+            border: 1px solid #C9C9C9;
+            border-right-width: 0;
             color: #444444;
         }
         .search-group > button
         {
             border-radius: 0 5px 5px 0;
-            border-style: solid;
-            border-color: #C9C9C9;
-            border-width: 1px 1px 1px 0;
+            border: 1px solid #C9C9C9;
+            border-left-width: 0;
         }
         .search-group > button:hover
         {

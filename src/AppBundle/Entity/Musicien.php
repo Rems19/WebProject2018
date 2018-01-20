@@ -180,14 +180,6 @@ class Musicien
     }
 
     /**
-     * @return string
-     */
-    public function getNomPrenom()
-    {
-        return $this->nomMusicien . ' ' . $this->prenomMusicien;
-    }
-
-    /**
      * Set nomMusicien
      *
      * @param string $nomMusicien

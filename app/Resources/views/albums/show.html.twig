@@ -10,7 +10,9 @@
                 {% set ok = 0 %}
                 {% for artiste in album.artists(doctrine) %}
                     {% set ok = 1 %}
-                    <a class="artist_link" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">{{ artiste.nomMusicien }} {{ artiste.prenomMusicien }}</a>,
+                    <a class="artist_link" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">
+                        {{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}
+                    </a>,
                 {% endfor %}
                 {% if not ok %}Aucun artiste connu{% endif %}
             </small>
