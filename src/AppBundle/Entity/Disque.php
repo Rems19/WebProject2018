@@ -54,7 +54,7 @@ class Disque
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\CompositionDisque", mappedBy="disque")
      * @ORM\JoinColumn(name="Code_Disque", referencedColumnName="Code_Disque")
      */
-    private $compositions;
+    private $compositionsDisque;
 
     /**
      * Set codeAlbum
@@ -149,8 +149,8 @@ class Disque
     /**
      * @return mixed
      */
-    public function getCompositions()
+    public function getCompositionsDisque()
     {
-        return $this->compositions;
+        return $this->compositionsDisque;
     }
 }

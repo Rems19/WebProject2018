@@ -46,7 +46,7 @@ class Composer
     /**
      * @var Oeuvre
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Oeuvre", inversedBy="composer")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Oeuvre", mappedBy="composer")
      * @ORM\JoinColumn(name="Code_Oeuvre", referencedColumnName="Code_Oeuvre")
      */
     private $oeuvre;

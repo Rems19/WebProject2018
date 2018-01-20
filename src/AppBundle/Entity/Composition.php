@@ -52,7 +52,7 @@ class Composition
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\CompositionOeuvre", mappedBy="composition")
      * @ORM\JoinColumn(name="Code_Composition", referencedColumnName="Code_Composition")
      */
-    private $compositions_oeuvres;
+    private $compositionsOeuvres;
 
     /**
      * Set titreComposition
@@ -149,6 +149,6 @@ class Composition
      */
     public function getCompositionsOeuvres()
     {
-        return $this->compositions_oeuvres;
+        return $this->compositionsOeuvres;
     }
 }

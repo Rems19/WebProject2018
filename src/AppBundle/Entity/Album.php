@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Driver\Statement;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -82,7 +84,7 @@ class Album
     private $editeur;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Disque", mappedBy="album")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Disque", mappedBy="album", fetch="EAGER")
      * @ORM\JoinColumn(name="Code_Album", referencedColumnName="Code_Album")
      */
     private $disques;
@@ -133,7 +135,7 @@ class Album
      */
     public function getPochette()
     {
-        return base64_encode(stream_get_contents($this->pochette));
+        return base64_encode(pack('H*', stream_get_contents($this->pochette)));
     }
 
     /**
@@ -212,7 +214,7 @@ class Album
     /**
      * Set pochette
      *
-     * @param binary $pochette
+     * @param resource $pochette
      *
      * @return Album
      */
@@ -259,5 +261,32 @@ class Album
     public function getDisques()
     {
         return $this->disques;
+    }
+
+    /**
+     * @param ManagerRegistry $doctrine
+     * @return Musicien[]
+     */
+    public function getArtists(ManagerRegistry $doctrine)
+    {
+        /** @var Statement $stmt */
+        $stmt = $doctrine->getConnection()->prepare(
+            'SELECT DISTINCT m.Code_Musicien FROM Album a
+             INNER JOIN Disque d ON d.Code_Album = a.Code_Album
+             INNER JOIN Composition_Disque cd ON cd.Code_Disque = d.Code_Disque
+             INNER JOIN Enregistrement e ON e.Code_Morceau = cd.Code_Morceau
+             INNER JOIN Composition c ON c.Code_Composition = e.Code_Composition
+             INNER JOIN Composition_Oeuvre co ON co.Code_Composition = c.Code_Composition
+             INNER JOIN Oeuvre o ON o.Code_Oeuvre = co.Code_Oeuvre
+             INNER JOIN Composer c2 ON c2.Code_Oeuvre = o.Code_Oeuvre
+             INNER JOIN Musicien m ON m.Code_Musicien = c2.Code_Musicien
+             WHERE a.Code_Album = :codeAlbum'
+        );
+        $stmt->execute(['codeAlbum' => $this->codeAlbum]);
+        $musicienRepo = $doctrine->getRepository('AppBundle:Musicien');
+        $musiciens = [];
+        while ($code = $stmt->fetchColumn())
+            $musiciens[] = $musicienRepo->find($code);
+        return $musiciens;
     }
 }

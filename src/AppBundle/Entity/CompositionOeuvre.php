@@ -46,7 +46,7 @@ class CompositionOeuvre
     /**
      * @var Composition
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Composition", inversedBy="compositions_oeuvres")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Composition", inversedBy="compositionsOeuvres")
      * @ORM\JoinColumn(name="Code_Composition", referencedColumnName="Code_Composition")
      */
     private $composition;

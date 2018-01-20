@@ -169,7 +169,7 @@ class Musicien
      */
     public function getPhoto()
     {
-        return base64_encode(stream_get_contents($this->photo));
+        return base64_encode(pack('H*', stream_get_contents($this->photo)));
     }
 
     /**

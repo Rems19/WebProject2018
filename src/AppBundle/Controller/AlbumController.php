@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Album;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,19 +65,16 @@ class AlbumController extends Controller
     /**
      * @Route("/{codeAlbum}", name="showAlbum")
      *
-     * @param int $codeAlbum
+     * @param Album $album
      */
-    public function showAction($codeAlbum)
+    public function showAction(Album $album)
     {
-        $album = $this->getDoctrine()->getRepository('AppBundle:Album')->find($codeAlbum);
-        $disques = $album->getDisques();
-        dump(get_class($album));
-
         return $this->render(':albums:show.html.twig', [
+            'doctrine' => $this->getDoctrine(),
             'page_head' => 'Albums',
             'page_head_small' => 'Des centaines d\'albums à votre disposition',
             'box_head' => $album->getTitreAlbum(),
-            'box_width' => '70%',
+            'box_width' => '80%',
             'album' => $album
         ]);
     }

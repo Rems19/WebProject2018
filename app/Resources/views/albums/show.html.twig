@@ -3,8 +3,17 @@
 {% block body %}
     <div class="album">
         <img src="data:image/jpeg;base64,{{ album.pochette }}">
-        {{ dump(album.disques) }}
-        {#<h3>{{ album.titreAlbum }} ({{ album.anneeAlbum }}) <small>Artiste : {{ album.disques[0].compositions[0].enregistrement.composition.compositionsOeuvres[0].oeuvre.composer.musicien.prenomNom }}</small></h3>#}
+        <div class="infos">
+            <h3>{{ album.titreAlbum }} ({{ album.anneeAlbum }})</h3>
+            <small>
+                Artistes :
+                {% for artiste in album.artists(doctrine) %}
+                    {% set ok = 'true' %}
+                    <a class="artist_link" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">{{ artiste.nomMusicien }} {{ artiste.prenomMusicien }}</a>,
+                {% endfor %}
+                {% if ok is not defined %}Aucun artiste connu{% endif %}
+            </small>
+        </div>
     </div>
 {% endblock %}
 
@@ -19,6 +28,17 @@
             width: 400px;
             padding-right: 20px;
             border-right: 2px solid #555555;
+            margin-right: 20px;
+        }
+        .album .infos
+        {
+            display: flex;
+            flex-direction: column;
+        }
+        a.artist_link, a.artist_link:hover
+        {
+            color: #0088CC;
+            text-decoration: underline;
         }
     </style>
 {% endblock %}
