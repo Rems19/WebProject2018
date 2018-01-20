@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Driver\Statement;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -84,7 +85,7 @@ class Album
     private $editeur;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Disque", mappedBy="album", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Disque", mappedBy="album")
      * @ORM\JoinColumn(name="Code_Album", referencedColumnName="Code_Album")
      */
     private $disques;
@@ -135,7 +136,7 @@ class Album
      */
     public function getPochette()
     {
-        return base64_encode(pack('H*', stream_get_contents($this->pochette)));
+        return base64_encode(stream_get_contents($this->pochette));
     }
 
     /**
@@ -284,9 +285,7 @@ class Album
         );
         $stmt->execute(['codeAlbum' => $this->codeAlbum]);
         $musicienRepo = $doctrine->getRepository('AppBundle:Musicien');
-        $musiciens = [];
-        while ($code = $stmt->fetchColumn())
-            $musiciens[] = $musicienRepo->find($code);
+        $musiciens = $musicienRepo->findByCodeMusicien($stmt->fetchAll(\PDO::FETCH_COLUMN));
         return $musiciens;
     }
 }

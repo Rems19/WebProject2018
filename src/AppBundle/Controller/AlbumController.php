@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Album;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,37 +17,27 @@ class AlbumController extends Controller
      */
     public function listAction(Request $request)
     {
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        $ep = $em->getUnitOfWork()->getEntityPersister('AppBundle:Album');
+        /** @var EntityRepository $albumRepo */
         $albumRepo = $this->getDoctrine()->getRepository('AppBundle:Album');
 
+        $page = $request->query->getInt('page', 1);
 
-        if ($request->query->has('page'))
-            $page = $request->query->getInt('page');
-        else $page = 1;
-
-
+        $criteria = Criteria::create();
 
         if ($request->query->has('q')) {
-            $albums = $albumRepo->createQueryBuilder('a')
-                ->andWhere('a.titreAlbum LIKE :q')
-                ->setParameter('q', $request->query->getAlnum('q').'%')
-                ->orderBy('a.titreAlbum', 'ASC')
-                ->setMaxResults(10)
-                ->setFirstResult(10 * ($page - 1))
-                ->getQuery()
-                ->execute();
-            $totalCount = $albumRepo->createQueryBuilder('a')
-                ->select('COUNT(a)')
-                ->andWhere('a.titreAlbum LIKE :q')
-                ->setParameter('q', $request->query->getAlnum('q').'%')
-                ->getQuery()
-                ->getSingleScalarResult();
-//            $albums = $albumRepo->findBy(['titreAlbum' => $request->query->getAlnum('q').'%'], ['titreAlbum' => 'ASC', 10, 10 * ($page - 1)]);
+            $q = $request->query->getAlnum('q', null);
+            $criteria->andWhere(Criteria::expr()->startsWith('titreAlbum', $q));
         }
-        else
-        {
-            $albums = $albumRepo->findBy([], ['titreAlbum' => 'ASC'], 10, 10 * ($page - 1));
-            $totalCount = $albumRepo->createQueryBuilder('a')->select('COUNT(a)')->getQuery()->getSingleScalarResult();
-        }
+
+        $albums = $albumRepo->matching($criteria
+            ->orderBy(['titreAlbum' => 'ASC'])
+            ->setFirstResult(10 * ($page - 1))
+            ->setMaxResults(10)
+        );
+        $totalCount = $ep->count($criteria);
 
         $hasNextPage = $totalCount > 10 * $page;
 
@@ -56,7 +48,7 @@ class AlbumController extends Controller
             'box_width' => '90%',
             'albums' => $albums,
             'page' => $page,
-            'q' => $request->query->getAlnum('q', null),
+            'q' => $q,
             'hasNextPage' => $hasNextPage,
             'total' => $totalCount
         ]);

@@ -7,11 +7,12 @@
             <h3>{{ album.titreAlbum }} ({{ album.anneeAlbum }})</h3>
             <small>
                 Artistes :
+                {% set ok = 0 %}
                 {% for artiste in album.artists(doctrine) %}
-                    {% set ok = 'true' %}
+                    {% set ok = 1 %}
                     <a class="artist_link" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">{{ artiste.nomMusicien }} {{ artiste.prenomMusicien }}</a>,
                 {% endfor %}
-                {% if ok is not defined %}Aucun artiste connu{% endif %}
+                {% if not ok %}Aucun artiste connu{% endif %}
             </small>
         </div>
     </div>

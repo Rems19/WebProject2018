@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 /**
  * Musicien
@@ -169,7 +168,7 @@ class Musicien
      */
     public function getPhoto()
     {
-        return base64_encode(pack('H*', stream_get_contents($this->photo)));
+        return $this->photo != null ? base64_encode(stream_get_contents($this->photo)) : null;
     }
 
     /**
