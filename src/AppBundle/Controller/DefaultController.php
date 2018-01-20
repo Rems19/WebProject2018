@@ -23,6 +23,10 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('about.html.twig');
+        return $this->render('about.html.twig',[
+            'page_head' => 'Qui sommes-nous?',
+            'box_head' => 'Tout d\'abord, une découverte'
+        ]);
+
     }
 }
