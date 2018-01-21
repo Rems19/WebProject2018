@@ -10,10 +10,10 @@
         <a class="arrow-link {% if page == 1 %} disabled {% endif %}" href="?page={{ page - 1 }}{% if q %}&q={{ q }}{% endif %}">&lt;</a>
         <div id="albums-content">
             {% for album in albums %}
-                <div class="album" onclick="location.href='{{ path('showAlbum', {'codeAlbum': album.codeAlbum}) }}'">
+                <a class="album" href="{{ path('showAlbum', {'codeAlbum': album.codeAlbum}) }}">
                     <img src="data:image/jpeg;base64,{{ album.pochette }}">
                     <small>{{ album.titreAlbum }}</small>
-                </div>
+                </a>
             {% endfor %}
         </div>
         <a class="arrow-link {% if not hasNextPage %} disabled {% endif %}" href="?page={{ page + 1 }}{% if q %}&q={{ q }}{% endif %}">&gt;</a>
@@ -74,6 +74,7 @@
             text-align: center;
             padding: 15px 5px 5px 5px;
             cursor: pointer;
+            color: #C9C9C9;
         }
         .album:not(:nth-child(5n))
         {
@@ -82,6 +83,8 @@
         .album:hover
         {
             background-color: rgba(255, 255, 255, 0.3);
+            color: #00BBFF;
+            text-decoration: underline;
         }
         .album > img
         {

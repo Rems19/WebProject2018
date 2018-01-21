@@ -12,7 +12,7 @@
                     {% for artiste in album.artists(doctrine) %}
                         {% set ok = 1 %}
                         <li>
-                            <a class="artist_link" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">
+                            <a class="artist_link" href="{{ path('showArtist', {'codeMusicien': artiste.codeMusicien}) }}">
                                 {{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}
                             </a>
                         </li>
@@ -30,11 +30,17 @@
                 {% set disqueNb = disqueNb + 1 %}
                 <ol>
                     {% for enr in disque.enregistrements(doctrine) %}
+                        {% set has = app.session.get('cart')[enr.codeMorceau] is defined %}
                         <li>
                             {{ enr.titre }}
                             <div class="enr-info">
                                 <audio class="flex-grow" controls src="data:audio/ogg;base64,{{ enr.extrait }}"></audio>
-                                <a href="{{ path('cartAddTrack', {'id': enr.codeMorceau}) }}"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au panier</a>
+                                <a class="btn btn-primary {{ has ? 'disable-link hint--bottom hint--error hint--medium' }}"
+                                   href="{{ has ? '#' : path('cartAddTrack', {'id': enr.codeMorceau}) }}?ref={{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}"
+                                   {{ has ? 'aria-label="Vous possédez déjà ce morceau ou il est dans votre panier"' }}
+                                >
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au panier
+                                </a>
                             </div>
                         </li>
                     {% endfor %}
@@ -78,9 +84,11 @@
             padding-bottom: 5px;
             margin-bottom: 5px;
         }
-        .enr-info a
+        .enr-info .btn.disable-link
         {
-            justify-self: flex-end;
+            cursor: not-allowed;
+            background-color: #286090A6;
+            border-color: #204d74;
         }
         .enr-info .flex-grow
         {
@@ -105,7 +113,7 @@
         {
             font-size: 1em;
         }
-        a.artist_link, a.artist_link:hover, .enr-info a, .enr-info a:hover
+        a.artist_link, a.artist_link:hover
         {
             color: #0088CC;
             text-decoration: underline;

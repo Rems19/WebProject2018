@@ -10,10 +10,10 @@
         <a class="arrow-link {% if page == 1 %} disabled {% endif %}" href="?page={{ page - 1 }}{% if q %}&q={{ q }}{% endif %}">&lt;</a>
         <div id="artistes-content">
             {% for artiste in artistes %}
-                <div class="artiste" onclick="location.href='{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}'">
+                <a class="artiste" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">
                     <img src="data:image/jpeg;base64,{{ artiste.photo }}">
                     <small>{{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}</small>
-                </div>
+                </a>
             {% endfor %}
         </div>
         <a class="arrow-link {% if not hasNextPage %} disabled {% endif %}" href="?page={{ page + 1 }}{% if q %}&q={{ q }}{% endif %}">&gt;</a>
@@ -72,6 +72,7 @@
             text-align: center;
             padding: 15px 5px 5px 5px;
             cursor: pointer;
+            color: #C9C9C9;
         }
         .artiste:not(:nth-child(5n))
         {
@@ -80,6 +81,8 @@
         .artiste:hover
         {
             background-color: rgba(255, 255, 255, 0.3);
+            color: #00BBFF;
+            text-decoration: underline;
         }
         .artiste > img
         {

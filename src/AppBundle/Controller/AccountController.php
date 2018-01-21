@@ -42,13 +42,17 @@ class AccountController extends Controller
     /**
      * @Route("/cart/addTrack/{id}", name="cartAddTrack")
      */
-    public function addTrackToCart(Enregistrement $enregistrement)
+    public function addTrackToCart(Request $request, Enregistrement $enregistrement)
     {
+        $ref = $request->query->get('ref', null);
         $session = $this->get('session');
         $cart = $session->get('cart', array());
         $cart[$enregistrement->getCodeMorceau()] = $enregistrement;
         $session->set('cart', $cart);
-        return $this->redirectToRoute('cart');
+        if ($ref != null)
+            return $this->redirect($ref);
+        else
+            return $this->redirectToRoute('cart');
     }
 
     /**
@@ -66,8 +70,9 @@ class AccountController extends Controller
     /**
      * @Route("/cart/addAlbum/{id}", name="cartAddAlbum")
      */
-    public function addAlbumToCart(Album $album)
+    public function addAlbumToCart(Request $request, Album $album)
     {
+        $ref = $request->query->get('ref', null);
         $session = $this->get('session');
         $cart = $session->get('cart', array());
         /** @var Disque $d */
@@ -79,7 +84,10 @@ class AccountController extends Controller
             }
         }
         $session->set('cart', $cart);
-        return $this->redirectToRoute('cart');
+        if ($ref != null)
+            return $this->redirect($ref);
+        else
+            return $this->redirectToRoute('cart');
     }
 
     /**

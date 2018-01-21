@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="artiste">
+        <div class="main">
+            <img src="data:image/jpeg;base64,{{ artiste.photo }}">
+            <div class="infos flex-grow">
+                <h3>{{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}</h3>
+                <span>Né(e) en {{ artiste.anneeNaissance }}</span>
+                {% if artiste.anneeMort %}
+                    <span>Mort en {{ artiste.anneeMort }} </span>
+                {% endif %}
+                <span>Nationalité : {{ artiste.pays ? artiste.pays.nomPays : "Inconnue" }}</span>
+                <span>Genre de prédilection : {{ artiste.genre.libelleAbrege }}</span>
+                <span>Instrument de prédilection : {{ artiste.instrument.nomInstrument }}</span>
+            </div>
+        </div>
+        <div id="albums">
+            <h3>Albums de {{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}</h3>
+            <div id="albums-content">
+                {% for album in artiste.albums(doctrine) %}
+                    <a class="album" href="{{ path('showAlbum', {'codeAlbum': album.codeAlbum}) }}">
+                        <img src="data:image/jpeg;base64,{{ album.pochette }}">
+                        <small>{{ album.titreAlbum }}</small>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .artiste
+        {
+            display: flex;
+            flex-direction: column;
+        }
+        .artiste .main
+        {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .artiste .main img
+        {
+            min-width: 400px;
+            min-height: 400px;
+        }
+        .artiste .infos
+        {
+            display: flex;
+            flex-direction: column;
+            padding-left: 20px;
+            border-left: 2px solid #555555;
+            margin-left: 20px;
+        }
+        #albums
+        {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            border-top: 2px solid #555555;
+        }
+        #albums-content
+        {
+            flex-grow: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .album
+        {
+            width: 18%;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 15px 5px 5px 5px;
+            cursor: pointer;
+            color: #C9C9C9;
+        }
+        .album:not(:nth-child(5n))
+        {
+            margin-right: 2%;
+        }
+        .album:hover
+        {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #00BBFF;
+            text-decoration: underline;
+        }
+        .album > img
+        {
+            width: 80%;
+        }
+    </style>
+{% endblock %}

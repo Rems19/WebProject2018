@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Driver\Statement;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -323,5 +325,28 @@ class Musicien
         return $this->instrument;
     }
 
-
+    /**
+     * @param ManagerRegistry $doctrine
+     * @return Album[]
+     */
+    public function getAlbums(ManagerRegistry $doctrine)
+    {
+        /** @var Statement $stmt */
+        $stmt = $doctrine->getConnection()->prepare(
+            'SELECT DISTINCT a.Code_Album FROM Musicien m
+             INNER JOIN Composer c ON c.Code_Musicien= m.Code_Musicien
+             INNER JOIN Oeuvre o ON o.Code_Oeuvre= c.Code_Oeuvre
+             INNER JOIN Composition_Oeuvre co ON co.Code_Oeuvre = o.Code_Oeuvre
+             INNER JOIN Composition c2 ON c2.Code_Composition = co.Code_Composition
+             INNER JOIN Enregistrement e ON e.Code_Composition = c2.Code_Composition
+             INNER JOIN Composition_Disque cd ON cd.Code_Morceau = e.Code_Morceau
+             INNER JOIN Disque d ON d.Code_Disque = cd.Code_Disque
+             INNER JOIN Album a ON a.Code_Album = d.Code_Album
+             WHERE m.Code_Musicien = :codeMusicien'
+        );
+        $stmt->execute(['codeMusicien' => $this->codeMusicien]);
+        $albumRepo = $doctrine->getRepository('AppBundle:Album');
+        $albums = $albumRepo->findByCodeAlbum($stmt->fetchAll(\PDO::FETCH_COLUMN));
+        return $albums;
+    }
 }

@@ -78,11 +78,11 @@ class Instrument
     /**
      * Get image
      *
-     * @return resource
+     * @return string
      */
     public function getImage()
     {
-        return $this->image;
+        return $this->image != null ? base64_encode(stream_get_contents($this->image)) : null;
     }
 
     /**

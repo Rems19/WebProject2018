@@ -67,12 +67,19 @@ class ArtisteController extends Controller
     }
 
     /**
-     * @Route("/{codeArtiste}", name="showArtist")
+     * @Route("/{codeMusicien}", name="showArtist")
      *
-     * @param int $codeArtiste
+     * @param Musicien $musicien
      */
-    public function showAction($codeArtiste)
+    public function showAction(Musicien $musicien)
     {
-
+        return $this->render(':artistes:show.html.twig', [
+            'doctrine' => $this->getDoctrine(),
+            'page_head' => 'Artistes',
+            'page_head_small' => 'Des centaines d\'artistes à découvrir',
+            'box_head' => $musicien->getPrenomMusicien() . ' ' . $musicien->getNomMusicien(),
+            'box_width' => '80%',
+            'artiste' => $musicien
+        ]);
     }
 }
