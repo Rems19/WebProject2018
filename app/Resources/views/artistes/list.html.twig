@@ -10,7 +10,7 @@
         <a class="arrow-link {% if page == 1 %} disabled {% endif %}" href="?page={{ page - 1 }}{% if q %}&q={{ q }}{% endif %}">&lt;</a>
         <div id="artistes-content">
             {% for artiste in artistes %}
-                <a class="artiste" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">
+                <a class="artiste" href="{{ path('showArtist', {'codeMusicien': artiste.codeMusicien}) }}">
                     <img src="data:image/jpeg;base64,{{ artiste.photo }}">
                     <small>{{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}</small>
                 </a>
