@@ -69,7 +69,7 @@ class AlbumController extends Controller
             'doctrine' => $this->getDoctrine(),
             'page_head' => 'Albums',
             'page_head_small' => 'Des centaines d\'albums à votre disposition',
-            'box_head' => $album->getTitreAlbum(),
+            'box_head' => $album->getTitreAlbum() . ' (' . $album->getAnneeAlbum() . ')',
             'box_width' => '80%',
             'album' => $album
         ]);

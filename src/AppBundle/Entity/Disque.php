@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Driver\Statement;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -152,5 +154,24 @@ class Disque
     public function getCompositionsDisque()
     {
         return $this->compositionsDisque;
+    }
+
+    /**
+     * @param ManagerRegistry $doctrine
+     * @return Enregistrement[]
+     */
+    public function getEnregistrements(ManagerRegistry $doctrine)
+    {
+        /** @var Statement $stmt */
+        $stmt = $doctrine->getConnection()->prepare(
+            'SELECT DISTINCT e.Code_Morceau FROM Disque d
+             INNER JOIN Composition_Disque cd ON cd.Code_Disque = d.Code_Disque
+             INNER JOIN Enregistrement e ON e.Code_Morceau = cd.Code_Morceau
+             WHERE d.Code_Disque = :codeDisque'
+        );
+        $stmt->execute(['codeDisque' => $this->codeDisque]);
+        $enrRepo = $doctrine->getRepository('AppBundle:Enregistrement');
+        $enregistrements = $enrRepo->findByCodeMorceau($stmt->fetchAll(\PDO::FETCH_COLUMN));
+        return $enregistrements;
     }
 }

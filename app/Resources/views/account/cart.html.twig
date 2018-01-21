@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="cart-content">
+        {% if cart %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titre</th>
+                    <th>Prix</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set total = 0 %}
+                {% for enr in cart %}
+                    {% set total = total + enr.prix %}
+                    <tr>
+                        <td>{{ enr.codeMorceau }}</td>
+                        <td>{{ enr.titre }}</td>
+                        <td>{{ enr.prix }}€</td>
+                        <td>
+                            <a class="btn btn-danger" href="{{ path('cartDelTrack', {'id': enr.codeMorceau}) }}">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="2">Total :</th>
+                    <th colspan="2">{{ total }}€</th>
+                </tr>
+                </tfoot>
+            </table>
+            <div class="cart-actions">
+                <a class="btn btn-success"><span class="glyphicon glyphicon-euro"></span> Commander</a>
+                <a class="btn btn-danger" href="{{ path('cartEmpty') }}"><span class="glyphicon glyphicon-trash"></span> Vider le panier</a>
+            </div>
+        {% else %}
+            Votre panier est vide
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .cart-content
+        {
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-actions
+        {
+            align-self: flex-end;
+        }
+        .cart-actions a.btn
+        {
+            font-size: 1em;
+        }
+    </style>
+{% endblock %}

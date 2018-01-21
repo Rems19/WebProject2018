@@ -239,11 +239,11 @@ class Enregistrement
     /**
      * Get extrait
      *
-     * @return resource
+     * @return string
      */
     public function getExtrait()
     {
-        return $this->extrait;
+        return base64_encode(stream_get_contents($this->extrait));
     }
 
     /**

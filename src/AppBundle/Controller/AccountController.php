@@ -3,6 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Abonne;
+use AppBundle\Entity\Album;
+use AppBundle\Entity\Disque;
+use AppBundle\Entity\Enregistrement;
 use AppBundle\Entity\Pays;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,17 +15,75 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AccountController extends Controller
 {
-
     /**
-     * @Route("/account/cart", name="cart")
+     * @Route("/cart", name="cart")
      */
     public function showCart()
     {
-
+        /** @var Enregistrement[] $cart */
+        $cart = $this->get('session')->get('cart');
+        return $this->render(':account:cart.html.twig', [
+            'page_head' => 'Panier',
+            'box_head' => 'Morceaux dans votre panier',
+            'box_width' => '80%',
+            'cart' => $cart
+        ]);
     }
 
     /**
-     * @Route("/account/login", name="login")
+     * @Route("/cart/empty", name="cartEmpty")
+     */
+    public function emptyCart()
+    {
+        $this->get('session')->remove('cart');
+        return $this->redirectToRoute('cart');
+    }
+
+    /**
+     * @Route("/cart/addTrack/{id}", name="cartAddTrack")
+     */
+    public function addTrackToCart(Enregistrement $enregistrement)
+    {
+        $session = $this->get('session');
+        $cart = $session->get('cart', array());
+        $cart[$enregistrement->getCodeMorceau()] = $enregistrement;
+        $session->set('cart', $cart);
+        return $this->redirectToRoute('cart');
+    }
+
+    /**
+     * @Route("/cart/delTrack/{id}", name="cartDelTrack")
+     */
+    public function removeTrackFromCart($id)
+    {
+        $session = $this->get('session');
+        $cart = $session->get('cart', array());
+        unset($cart[$id]);
+        $session->set('cart', $cart);
+        return $this->redirectToRoute('cart');
+    }
+
+    /**
+     * @Route("/cart/addAlbum/{id}", name="cartAddAlbum")
+     */
+    public function addAlbumToCart(Album $album)
+    {
+        $session = $this->get('session');
+        $cart = $session->get('cart', array());
+        /** @var Disque $d */
+        foreach ($album->getDisques()->toArray() as $d)
+        {
+            foreach ($d->getEnregistrements($this->getDoctrine()) as $e)
+            {
+                $cart[$e->getCodeMorceau()] = $e;
+            }
+        }
+        $session->set('cart', $cart);
+        return $this->redirectToRoute('cart');
+    }
+
+    /**
+     * @Route("/login", name="login")
      */
     public function showLogin(UserInterface $user = null, AuthenticationUtils $authUtils)
     {
@@ -30,7 +91,7 @@ class AccountController extends Controller
         {
             return $this->redirect($this->generateUrl('homepage'));
         }
-        return $this->render(':security:login.html.twig', [
+        return $this->render(':account:login.html.twig', [
             'error' => $authUtils->getLastAuthenticationError(),
             'page_head' => 'Connexion',
             'page_head_small' => 'Connectez-vous à votre compte Alib\'Album',
@@ -40,7 +101,7 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("/account/register", name="register")
+     * @Route("/register", name="register")
      */
     public function showRegister(Request $request, UserInterface $user = null)
     {
@@ -96,7 +157,7 @@ class AccountController extends Controller
         }
         $countries = $paysRepo->findAll();
         usort($countries, function (Pays $a, Pays $b) { return strcmp($a->getNomPays(), $b->getNomPays()); });
-        return $this->render(':security:register.html.twig', [
+        return $this->render(':account:register.html.twig', [
             'errors' => empty($errors) ? null : $errors,
             'countries' => $countries,
             'page_head' => 'Inscription',

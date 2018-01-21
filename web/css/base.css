@@ -91,3 +91,12 @@ input.form-control, select.form-control {
 {
     color: black;
 }
+.flex-grow
+{
+    flex-grow: 1;
+}
+
+a, .btn
+{
+    outline: none;
+}

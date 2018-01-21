@@ -2,6 +2,11 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
+account:
+    resource: '@AppBundle/Controller/AccountController.php'
+    type: annotation
+    prefix: /account
+
 artists:
     resource: '@AppBundle/Controller/ArtisteController.php'
     type: annotation

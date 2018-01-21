@@ -2,20 +2,43 @@
 
 {% block body %}
     <div class="album">
-        <img src="data:image/jpeg;base64,{{ album.pochette }}">
-        <div class="infos">
-            <h3>{{ album.titreAlbum }} ({{ album.anneeAlbum }})</h3>
-            <small>
+        <div class="main">
+            <img src="data:image/jpeg;base64,{{ album.pochette }}">
+            <div class="infos flex-grow">
+                <h3>{{ album.titreAlbum }} ({{ album.anneeAlbum }})</h3>
                 Artistes :
-                {% set ok = 0 %}
-                {% for artiste in album.artists(doctrine) %}
-                    {% set ok = 1 %}
-                    <a class="artist_link" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">
-                        {{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}
-                    </a>,
-                {% endfor %}
-                {% if not ok %}Aucun artiste connu{% endif %}
-            </small>
+                <ul class="flex-grow">
+                    {% set ok = 0 %}
+                    {% for artiste in album.artists(doctrine) %}
+                        {% set ok = 1 %}
+                        <li>
+                            <a class="artist_link" href="{{ path('showArtist', {'codeArtiste': artiste.codeMusicien}) }}">
+                                {{ artiste.prenomMusicien }} {{ artiste.nomMusicien }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    {% if not ok %}<li>Aucun artiste connu</li>{% endif %}
+                </ul>
+                <a class="btn btn-primary" href="{{ path('cartAddAlbum', {'id': album.codeAlbum}) }}"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter l'album au panier</a>
+            </div>
+        </div>
+        <div class="album-content">
+            {% set disqueNb = 1 %}
+            {# @var disque \AppBundle\Entity\Disque #}
+            {% for disque in album.disques.toArray %}
+                Disque {{ disqueNb }} :
+                <ol>
+                    {% for enr in disque.enregistrements(doctrine) %}
+                        <li>
+                            {{ enr.titre }}
+                            <div class="enr-info">
+                                <audio class="flex-grow" controls src="data:audio/ogg;base64,{{ enr.extrait }}"></audio>
+                                <a href="{{ path('cartAddTrack', {'id': enr.codeMorceau}) }}"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au panier</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
@@ -25,23 +48,70 @@
         .album
         {
             display: flex;
+            flex-direction: column;
+        }
+        .album .main
+        {
+            display: flex;
+            margin-bottom: 20px;
         }
         .album img
         {
-            width: 400px;
-            padding-right: 20px;
-            border-right: 2px solid #555555;
-            margin-right: 20px;
+            min-width: 400px;
+            min-height: 400px;
         }
         .album .infos
         {
             display: flex;
             flex-direction: column;
+            padding-left: 20px;
+            border-left: 2px solid #555555;
+            margin-left: 20px;
         }
-        a.artist_link, a.artist_link:hover
+        .enr-info
+        {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            border-bottom: 1px dashed #C9C9C9;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        .enr-info a
+        {
+            justify-self: flex-end;
+        }
+        .enr-info .flex-grow
+        {
+            margin-right: 10px;
+        }
+        .infos ul
+        {
+            list-style-type: none;
+        }
+        .album-content
+        {
+            padding-top: 20px;
+            border-top: 2px solid #555555;
+        }
+        .album-content ol
+        {
+            font-size: 0.8em;
+            margin-left: 10px;
+            border-left: 1px solid #AAAAAA;
+        }
+        .infos a.btn
+        {
+            font-size: 1em;
+        }
+        a.artist_link, a.artist_link:hover, .enr-info a, .enr-info a:hover
         {
             color: #0088CC;
             text-decoration: underline;
+        }
+        a.artist_link:hover
+        {
+            background-color: #0088CC44;
         }
     </style>
 {% endblock %}
