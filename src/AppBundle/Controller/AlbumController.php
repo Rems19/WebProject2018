@@ -33,17 +33,22 @@ class AlbumController extends Controller
         $totalCount = $ep->count($criteria);
         $maxPage = ceil($totalCount / 10.0);
 
-        $page = $request->query->getInt('page', 1);
-        if ($page < 1) return $this->redirect("?".($q != null ? "q=$q&" : "")."page=1");
-        else if ($page > $maxPage) return $this->redirect("?".($q != null ? "q=$q&" : "")."page=$maxPage");
+        $albums = [];
+        $page = 1;
+        $hasNextPage = false;
+        if ($maxPage > 0) {
+            $page = $request->query->getInt('page', 1);
+            if ($page < 1) return $this->redirect("?" . ($q != null ? "q=$q&" : "") . "page=1");
+            else if ($page > $maxPage) return $this->redirect("?" . ($q != null ? "q=$q&" : "") . "page=$maxPage");
 
-        $albums = $albumRepo->matching($criteria
-            ->orderBy(['titreAlbum' => 'ASC'])
-            ->setFirstResult(10 * ($page - 1))
-            ->setMaxResults(10)
-        );
+            $albums = $albumRepo->matching($criteria
+                ->orderBy(['titreAlbum' => 'ASC'])
+                ->setFirstResult(10 * ($page - 1))
+                ->setMaxResults(10)
+            );
 
-        $hasNextPage = $totalCount > 10 * $page;
+            $hasNextPage = $totalCount > 10 * $page;
+        }
 
         return $this->render(':albums:list.html.twig', [
             'page_head' => 'Albums',

@@ -6,18 +6,22 @@
         <button><span class="glyphicon glyphicon-search"></span></button>
         <span class="info">Total : {{ total }} Albums - Affichés : {{ (page - 1) * 10 + 1 }}-{{ min(page * 10, total) }} (Page {{ page }})</span>
     </form>
-    <div id="albums">
-        <a class="arrow-link {% if page == 1 %} disabled {% endif %}" href="?page={{ page - 1 }}{% if q %}&q={{ q }}{% endif %}">&lt;</a>
-        <div id="albums-content">
-            {% for album in albums %}
-                <a class="album" href="{{ path('showAlbum', {'codeAlbum': album.codeAlbum}) }}">
-                    <img src="data:image/jpeg;base64,{{ album.pochette }}">
-                    <small>{{ album.titreAlbum }}</small>
-                </a>
-            {% endfor %}
+    {% if not albums is empty %}
+        <div id="albums">
+            <a class="arrow-link {% if page == 1 %} disabled {% endif %}" href="?page={{ page - 1 }}{% if q %}&q={{ q }}{% endif %}">&lt;</a>
+            <div id="albums-content">
+                {% for album in albums %}
+                    <a class="album" href="{{ path('showAlbum', {'codeAlbum': album.codeAlbum}) }}">
+                        <img src="data:image/jpeg;base64,{{ album.pochette }}">
+                        <small>{{ album.titreAlbum }}</small>
+                    </a>
+                {% endfor %}
+            </div>
+            <a class="arrow-link {% if not hasNextPage %} disabled {% endif %}" href="?page={{ page + 1 }}{% if q %}&q={{ q }}{% endif %}">&gt;</a>
         </div>
-        <a class="arrow-link {% if not hasNextPage %} disabled {% endif %}" href="?page={{ page + 1 }}{% if q %}&q={{ q }}{% endif %}">&gt;</a>
-    </div>
+    {% else %}
+        Aucun résultat
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
