@@ -27,6 +27,7 @@
             {# @var disque \AppBundle\Entity\Disque #}
             {% for disque in album.disques.toArray %}
                 Disque {{ disqueNb }} :
+                {% set disqueNb = disqueNb + 1 %}
                 <ol>
                     {% for enr in disque.enregistrements(doctrine) %}
                         <li>
