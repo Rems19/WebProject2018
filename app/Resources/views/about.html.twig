@@ -8,24 +8,34 @@
         la solution adaptée était symfony.
         <br>
         <br>
+        <strong>Notre solution au problème</strong><br><br>
+        C'est avec fierté que nous vous présentons Alib'album. Alib'album est un site qui, en étant lié à une base de données, permet  à des nouveaux clients de s'inscrire
+        et aux plus assidus de se connecter. De plus, deux pages présentent respectivement les différents auteurs d'albums et les différent albums. Sur ces deux pages il
+        ets possible de réaliser une recherche pour trouver son musicien ou album préféré en quelques secondes! Egalement, en cliquant sur les artistes, il s'affiche une page
+        avec les albums de chacun! Il est aussi possible à partir de la page d'un album de connaître son réalisateur.<br><br>
         <strong>Aymeric Devriésère et Rémi Labergère</strong><br><br>
-        Nous sommes deux étudiants en Informatique à l'IUT de Bordeaux. Nous sommes passionnés de nouvelles technologies et ce site était pour nous
-        un moyen de pouvoir s'entrainer sur un outil avec lequel on était peu familié et on y a pris goût! <br>
+        Nous sommes deux étudiants en Informatique à l'IUT de Bordeaux. Nous sommes passionnés de nouvelles technologies. Ce site était pour nous
+        un moyen de pouvoir s'entrainer en utilisant un outil avec lequel on était peu familié et on y a pris goût! <br>
         Si vous êtes une entreprise ou un particulier et que vous souhaiter faire l'aquisition d'un site web, n'hésitez pas à nous contacter!<br><br>
 
         <strong>Situations blocantes au court du projet?</strong><br><br>
-        Mais, vous savez, moi je ne crois pas qu'il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer
-        ma vie aujourd'hui avec vous, je dirais que c'est d'abord des rencontres, des gens qui m'ont tendu la main, peut-être
-        à un moment où je ne pouvais pas, où j'étais seul chez moi. Et c'est assez curieux de se dire que les hasards, les
-        rencontres forgent une destinée... Parce que quand on a le goût de la chose, quand on a le goût de la chose bien faite,
-        le beau geste, parfois on ne trouve pas l'interlocuteur en face, je dirais, le miroir qui vous aide à avancer. Alors
-        ce n'est pas mon cas, comme je le disais là, puisque moi au contraire, j'ai pu ; et je dis merci à la vie, je lui dis
-        merci, je chante la vie, je danse la vie... Je ne suis qu'amour ! Et finalement, quand beaucoup de gens aujourd'hui me
-        disent "Mais comment fais-tu pour avoir cette humanité ?", eh ben je leur réponds très simplement, je leur dis que c'est
-        ce goût de l'amour, ce goût donc qui m'a poussé aujourd'hui à entreprendre une construction mécanique, mais demain, qui
-        sait, peut-être seulement à me mettre au service de la communauté, à faire le don, le don de soi...<br><br>
+        Nous avons rencontré trois situtations blocantes principales. La première étant la découverte avancée de symfony qui nous a demandé énormement de recherches personnelles
+        et donc de temps. La seconde s'est présentée lorsque nous avons dû accéder à la base car certaines liaisons manquaient entre les tables et que certaines ne voulaient
+        pas se charger notamment à cause de la présence d'accens. La dernière situtation blocantes(que nous n'avons pas été en mesure de régler) est le dépot du site sur les serveurs
+        de l'IUT. En effet ces derniers manquaient de certaines ressources pour que le site puisse fonctionner desssus et nous n'avons pas la possibilité de rajouter les
+        choses manqauantes.<br><br>
         <strong>Contact : </strong>
-        <a Href="mailto:bla@bla.com">bla@bla.com</a>
+        <a class="mail_link" Href="mailto:bla@bla.com">bla@bla.com</a>
 
     </p>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        a.mail_link, a.mail_link:hover
+        {
+            color: #0088CC;
+            text-decoration: underline;
+        }
+    </style>
 {% endblock %}
