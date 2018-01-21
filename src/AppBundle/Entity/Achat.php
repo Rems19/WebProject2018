@@ -13,20 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Achat
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="Code_Enregistrement", type="integer", nullable=true)
-     */
-    private $codeEnregistrement;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="Code_Abonne", type="integer", nullable=true)
-     */
-    private $codeAbonne;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="Achat_Confirme", type="boolean", nullable=true)
@@ -57,54 +43,6 @@ class Achat
      * @ORM\JoinColumn(name="Code_Enregistrement", referencedColumnName="Code_Morceau")
      */
     private $enregistrement;
-
-    /**
-     * Set codeEnregistrement
-     *
-     * @param integer $codeEnregistrement
-     *
-     * @return Achat
-     */
-    public function setCodeEnregistrement($codeEnregistrement)
-    {
-        $this->codeEnregistrement = $codeEnregistrement;
-
-        return $this;
-    }
-
-    /**
-     * Get codeEnregistrement
-     *
-     * @return integer
-     */
-    public function getCodeEnregistrement()
-    {
-        return $this->codeEnregistrement;
-    }
-
-    /**
-     * Set codeAbonne
-     *
-     * @param integer $codeAbonne
-     *
-     * @return Achat
-     */
-    public function setCodeAbonne($codeAbonne)
-    {
-        $this->codeAbonne = $codeAbonne;
-
-        return $this;
-    }
-
-    /**
-     * Get codeAbonne
-     *
-     * @return integer
-     */
-    public function getCodeAbonne()
-    {
-        return $this->codeAbonne;
-    }
 
     /**
      * Set achatConfirme
@@ -155,4 +93,22 @@ class Achat
     {
         return $this->enregistrement;
     }
+
+    /**
+     * @param Abonne $abonne
+     */
+    public function setAbonne(Abonne $abonne)
+    {
+        $this->abonne = $abonne;
+    }
+
+    /**
+     * @param Enregistrement $enregistrement
+     */
+    public function setEnregistrement(Enregistrement $enregistrement)
+    {
+        $this->enregistrement = $enregistrement;
+    }
+
+
 }

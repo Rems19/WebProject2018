@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Abonne;
+use AppBundle\Entity\Achat;
 use AppBundle\Entity\Album;
 use AppBundle\Entity\Disque;
 use AppBundle\Entity\Enregistrement;
@@ -15,6 +16,49 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AccountController extends Controller
 {
+    /**
+     * @Route("/owned", name="ownedTracks")
+     */
+    public function showOwned()
+    {
+        /** @var Abonne $abonne */
+        $abonne = $this->getUser();
+        /** @var Enregistrement[] $morceaux */
+        return $this->render(':account:morceaux.html.twig', [
+            'page_head' => 'Mon Compte',
+            'box_head' => 'Morceaux que vous possédez',
+            'box_width' => '80%',
+            'morceaux' => $abonne->getEnregistrements($this->getDoctrine())
+        ]);
+    }
+
+    /**
+     * @Route("/cart/proceed", name="cartProceed")
+     */
+    public function cartProceed(Request $request)
+    {
+        /** @var Abonne $abonne */
+        $abonne = $this->getUser();
+        $ref = $request->query->get('ref', null);
+        $session = $this->get('session');
+        /** @var Enregistrement[] $cart */
+        $cart = $session->get('cart', array());
+        foreach ($cart as $enregistrement)
+        {
+            $achat = new Achat();
+            $achat->setAbonne($abonne);
+            $achat->setEnregistrement($enregistrement);
+            $achat->setAchatConfirme(true);
+            $this->getDoctrine()->getManager()->merge($achat);
+        }
+        $this->getDoctrine()->getManager()->flush();
+        $session->remove('cart');
+        if ($ref != null)
+            return $this->redirect($ref);
+        else
+            return $this->redirectToRoute('ownedTracks');
+    }
+
     /**
      * @Route("/cart", name="cart")
      */

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="morceaux-content">
+        {% if morceaux %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titre</th>
+                    <th>Ecouter</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set total = 0 %}
+                {% for enr in morceaux %}
+                    {% set total = total + enr.prix %}
+                    <tr>
+                        <td>{{ enr.codeMorceau }}</td>
+                        <td>{{ enr.titre }}</td>
+                        <td><audio controls src="data:audio/ogg;base64,{{ enr.extrait }}"></audio></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            Vous ne possédez aucun enregistrement
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .morceaux-content
+        {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+{% endblock %}

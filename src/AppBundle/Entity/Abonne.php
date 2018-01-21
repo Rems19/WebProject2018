@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Driver\Statement;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -399,5 +401,24 @@ class Abonne implements UserInterface, \Serializable
     public function getAchats()
     {
         return $this->achats;
+    }
+
+    /**
+     * @param ManagerRegistry $doctrine
+     * @return Enregistrement[]
+     */
+    public function getEnregistrements(ManagerRegistry $doctrine)
+    {
+        /** @var Statement $stmt */
+        $stmt = $doctrine->getConnection()->prepare(
+            'SELECT DISTINCT e.Code_Morceau FROM Abonne abo
+             INNER JOIN Achat a ON a.Code_Abonne = abo.Code_Abonne
+             INNER JOIN Enregistrement e ON e.Code_Morceau = a.Code_Enregistrement
+             WHERE abo.Code_Abonne = :codeAbonne'
+        );
+        $stmt->execute(['codeAbonne' => $this->codeAbonne]);
+        $enrRepo = $doctrine->getRepository('AppBundle:Enregistrement');
+        $enregistrements = $enrRepo->findByCodeMorceau($stmt->fetchAll(\PDO::FETCH_COLUMN));
+        return $enregistrements;
     }
 }

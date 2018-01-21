@@ -36,7 +36,7 @@
                 </tfoot>
             </table>
             <div class="cart-actions">
-                <a class="btn btn-success"><span class="glyphicon glyphicon-euro"></span> Commander</a>
+                <a class="btn btn-success" href="{{ path('cartProceed') }}"><span class="glyphicon glyphicon-euro"></span> Commander</a>
                 <a class="btn btn-danger" href="{{ path('cartEmpty') }}"><span class="glyphicon glyphicon-trash"></span> Vider le panier</a>
             </div>
         {% else %}
